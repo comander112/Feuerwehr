@@ -1,0 +1,914 @@
+﻿<!doctype html>
+<html lang="de">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+    <title>Feuerwehr – Fahrzeugerfassung</title>
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0b0f14">
+
+    <!-- iOS PWA / Icon -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Feuerwehrfahrzeuge">
+
+    <!-- wichtig: wirklich vorhandene Datei in dieser Größe -->
+    <link rel="apple-touch-icon" sizes="180x180" href="img/icon-180.png">
+
+
+    <title>Feuerwehr – Fahrzeugerfassung</title>
+    <style>
+        :root {
+            --bg: #0b0f14;
+            --panel: #121820;
+            --muted: #9bb0c3;
+            --text: #e8f0f7;
+            --accent: #4cc9f0;
+            --accent-2: #80ed99;
+            --danger: #ef476f;
+            --border: #1e2733;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font: 16px/1.45 system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 5;
+            background: linear-gradient(0deg, rgba(0,0,0,0), rgba(0,0,0,.25)), var(--panel);
+            border-bottom: 1px solid var(--border);
+            padding: 10px 16px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between
+        }
+
+            header h1 {
+                font-size: 18px;
+                margin: 0;
+                display: flex;
+                gap: 10px;
+                align-items: center;
+                font-weight: 600
+            }
+
+            header .buttons {
+                display: flex;
+                gap: 8px;
+                flex-wrap: wrap
+            }
+
+        .btn {
+            border: 1px solid var(--border);
+            background: #0f1620;
+            color: var(--text);
+            padding: 8px 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+            .btn:hover {
+                border-color: #2a3647
+            }
+
+        .btn-primary {
+            background: linear-gradient(180deg,#1b2533,#131b25);
+            border-color: #223044
+        }
+
+        .btn-accent {
+            background: linear-gradient(180deg,#13333b,#0f2830);
+            border-color: #1f4450;
+            color: #dff6ff
+        }
+
+        .btn-danger {
+            background: linear-gradient(180deg,#3a1721,#2a1119);
+            border-color: #5a2433
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 18px auto;
+            padding: 0 16px 40px
+        }
+
+        .hint {
+            color: var(--muted);
+            font-size: 14px;
+            margin: 6px 0 18px
+        }
+
+        .panel {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 14px;
+            margin: 14px 0
+        }
+
+        details {
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 10px
+        }
+
+        summary {
+            list-style: none;
+            cursor: pointer;
+            padding: 6px 4px
+        }
+
+            summary::-webkit-details-marker {
+                display: none
+            }
+
+        .group-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between
+        }
+
+            .group-header h2 {
+                font-size: 17px;
+                margin: 0
+            }
+
+        .group-actions {
+            font-size: 12px;
+            color: var(--muted)
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse
+        }
+
+        th, td {
+            padding: 8px 6px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: middle
+        }
+
+        th {
+            color: #cfe7ff;
+            font-weight: 600;
+            text-align: left;
+            font-size: 13px
+        }
+
+        tbody tr:hover {
+            background: #0e141d
+        }
+
+        input[type="text"], input[type="number"], input[type="date"], textarea {
+            background: #0d1420;
+            border: 1px solid #1e2a3a;
+            color: var(--text);
+            padding: 6px 8px;
+            border-radius: 8px;
+            width: 100%;
+            font: inherit;
+            font-size: 14px;
+        }
+
+
+        input[type="checkbox"] {
+            transform: scale(1.25)
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 36px
+        }
+
+        .totals {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 8px
+        }
+
+        .kpi {
+            background: #0e1621;
+            border: 1px solid var(--border);
+            padding: 10px 12px;
+            border-radius: 12px;
+            color: #cfe7ff
+        }
+
+            .kpi strong {
+                font-size: 18px;
+                color: var(--accent)
+            }
+
+            .kpi small {
+                display: block;
+                color: var(--muted)
+            }
+
+        .muted {
+            color: var(--muted);
+            font-size: 13px
+        }
+        .more {
+            display: grid;
+            gap: 10px;
+            grid-template-columns: 150px 500px 150px 120px
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+            .section-header h3 {
+                margin: 0
+            }
+
+        .autosave {
+            font-size: 12px;
+            color: var(--muted)
+        }
+
+        @media screen and (max-width:760px) {
+            #app table th:nth-child(2),
+            #app table td:nth-child(2) {
+                display: none;
+            }
+        }
+
+
+        /* Print styles */
+        #report {
+            display: none
+        }
+
+        /* Print styles */
+        #report {
+            display: none
+        }
+
+        @media print {
+            header, #app {
+                display: none !important
+            }
+
+            body {
+                background: white;
+                color: black
+            }
+
+            #report {
+                display: block
+            }
+
+            .panel {
+                border: 1px solid #aaa;
+                background: white
+            }
+        }
+
+        /* Tabellen im Druck ohne Linien */
+        .print-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+            .print-table th,
+            .print-table td {
+                border: none;
+                padding: 4px 4px;
+                font-size: 12px;
+            }
+
+            .print-table thead th {
+                font-weight: bold;
+            }
+
+            .print-table .group-row td {
+                padding-top: 8px;
+                font-weight: bold;
+            }
+
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🚒 Fahrzeugerfassung</h1>
+        <div class="buttons">
+            <button class="btn btn-accent" id="btnPrint">PDF / Drucken</button>
+            <button class="btn btn-primary" id="btnSave">Speichern</button>
+            <button class="btn btn-danger" id="btnReset">Alles löschen</button>
+        </div>
+    </header>
+
+    <main id="app">
+        <div class="panel" id="einsatzInfo">
+            <div style="display:grid; grid-template-columns: 3fr 1fr; gap:12px; align-items:end;">
+                <div>
+                    <label for="stichwort" style="display:block; font-weight:600; margin-bottom:4px;">Stichwort</label>
+                    <input type="text" id="stichwort">
+                </div>
+                <div>
+                    <label for="einsatzDatum" style="display:block; font-weight:600; margin-bottom:4px;">Einsatzdatum</label>
+                    <input type="date" id="einsatzDatum">
+                </div>
+            </div>
+        </div>
+        <div id="groups"></div>
+
+        <div id="totalsPanel" class="panel">
+            <h3>Gesamtsumme</h3>
+            <div class="totals">
+                <div class="kpi">
+                    <strong id="totalVehiclesOnSite">0</strong>
+                    <small>Fahrzeuge</small>
+                </div>
+                <div class="kpi">
+                    <strong id="totalCrew">0</strong>
+                    <small>Besatzung gesamt</small>
+                </div>
+                <div class="kpi">
+                    <strong id="totalAGT">0</strong>
+                    <small>AGT gesamt</small>
+                </div>
+            </div>
+            <div class="autosave" id="autosaveNote">Änderungen werden automatisch gespeichert.</div>
+        </div>
+        <!--
+        <div class="panel">
+
+    <div class="section-header">
+        <h3>Weitere Kräfte</h3>
+        <button class="btn" id="btnAddMore">Weitere Kraft hinzufügen</button>
+    </div>
+
+        <div style="overflow:auto">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width:220px">Name</th>
+                        <th>Notizen / Details</th>
+                        <th style="width:90px"></th>
+                    </tr>
+                </thead>
+                <tbody id="moreTbody"></tbody>
+            </table>
+        </div>
+        </div>-->
+    </main>
+
+    <!-- Druck-Ansicht -->
+    <div id="report" style="max-width:1100px;margin:0 auto;padding:16px">
+        <h2>Fahrzeugerfassung – Übersicht</h2>
+        <div id="reportContent"></div>
+        <p style="margin-top:24px; font-size:12px; color:#555">
+            Erstellt am <span id="reportDate"></span>
+        </p>
+    </div>
+
+    <script>
+        /* ===========================
+         * Anfangsdaten (anpassbar)
+         * =========================== */
+        const initialData = {
+            stichwort: "",
+            einsatzDatum: new Date().toISOString().split("T")[0],
+            groups: [
+                {
+                    id: "ds",
+                    name: "Dannstadt-Schauernheim",
+                    funkrufname: "Da-Schau 100",
+                    editable: false,
+                    vehicles: [
+                        { id: "ds-01", vehicle: "MTF", funkrufname: "Da-Schau 1/19-1", present: false, crew1: 0, crew2: 0, agt: 0 },
+                        { id: "ds-02", vehicle: "DLK 18/12", funkrufname: "Da-Schau 1/33-1", present: false, crew1: 0, crew2: 0, agt: 0 },
+                        { id: "ds-03", vehicle: "LF 8/6", funkrufname: "Da-Schau 1/44-1", present: false, crew1: 0, crew2: 0, agt: 0 },
+                        { id: "ds-04", vehicle: "LF 16/12", funkrufname: "Da-Schau 1/45-1", present: false, crew1: 0, crew2: 0, agt: 0 },
+                        { id: "ds-05", vehicle: "MZF 2", funkrufname: "Da-Schau 1/72-1", present: false, crew1: 0, crew2: 0, agt: 0 },
+
+                    ]
+                },
+                {
+                    id: "ha",
+                    name: "Hochdorf-Assenheim",
+                    funkrufname: "Da-Schau 2",
+                    editable: false,
+                    vehicles: [
+                        { id: "ha-01", vehicle: "MTF", funkrufname: "Da-Schau 2/19-1", present: false, crew1: 0, crew2: 0, agt: 0 },
+                        { id: "ha-02", vehicle: "TSF-W", funkrufname: "Da-Schau 2/42-1", present: false, crew1: 0, crew2: 0, agt: 0 },
+                        { id: "ha-03", vehicle: "LF 16-TS", funkrufname: "Da-Schau 2/43-1", present: false, crew1: 0, crew2: 0, agt: 0 },
+                        { id: "ha-04", vehicle: "RW 1", funkrufname: "Da-Schau 2/51-1", present: false, crew1: 0, crew2: 0, agt: 0 },
+                        { id: "ha-05", vehicle: "SW 2000", funkrufname: "Da-Schau 2/68-1", present: false, crew1: 0, crew2: 0, agt: 0 },
+
+                    ]
+                },
+                {
+                    id: "r",
+                    name: "Rödersheim",
+                    funkrufname: "Da-Schau 3",
+                    editable: false,
+                    vehicles: [
+                        { id: "r-01", vehicle: "ELW 1", funkrufname: "Da-Schau 3/11-1", present: false, crew1: 0, crew2: 0, agt: 0 },
+                        { id: "r-02", vehicle: "LF 16/12", funkrufname: "Da-Schau 3/45-1", present: false, crew1: 0, crew2: 0, agt: 0 },
+                    ]
+                },
+                {
+                    id: "g",
+                    name: "Gronau",
+                    funkrufname: "Da-Schau 4",
+                    editable: false,
+                    vehicles: [
+                        { id: "g-01", vehicle: "MTF", funkrufname: "Da-Schau 4/19-1", present: false, crew1: 0, crew2: 0, agt: 0 },
+                        { id: "g-02", vehicle: "TSF-W", funkrufname: "Da-Schau 4/42-1", present: false, crew1: 0, crew2: 0, agt: 0 },
+                        { id: "g-03", vehicle: "MZF-G", funkrufname: "Da-Schau 4/73-1", present: false, crew1: 0, crew2: 0, agt: 0 },
+                    ]
+                },
+                {
+                    id: "weitere",
+                    name: "Weitere Kräfte",
+                    funkrufname: "",
+                    editable: true,
+                    vehicles: [
+                        { id: "w-01", vehicle: "RTW", funkrufname: "", present: false, crew1: 0, crew2: 0, agt: 0 },
+                        { id: "w-02", vehicle: "NEF", funkrufname: "", present: false, crew1: 0, crew2: 0, agt: 0 },
+                        { id: "w-03", vehicle: "Polizei", funkrufname: "", present: false, crew1: 0, crew2: 0, agt: 0 },
+                    ]
+                }
+            ],
+            more: [
+                { name: "RTW", note: "" },
+                { name: "NEF", note: "" },
+                { name: "Polizei", note: "" }
+            ]
+        };
+
+        const STORAGE_KEY = "fw-erfassung-v3";
+
+        function cloneInitial() {
+            return JSON.parse(JSON.stringify(initialData));
+        }
+
+        /* ===========================
+         * Laden / Speichern
+         * =========================== */
+        let state = loadState();
+
+        function loadState() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (!raw) return cloneInitial();
+                const parsed = JSON.parse(raw);
+                if (!parsed.groups) parsed.groups = cloneInitial().groups;
+                if (!parsed.more) parsed.more = [];
+                return parsed;
+            } catch (e) {
+                console.warn("Konnte Zustand nicht laden:", e);
+                return cloneInitial();
+            }
+        }
+
+        function saveState() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+                setAutosaveNote("Gespeichert.");
+            } catch (e) {
+                console.warn("Speichern fehlgeschlagen:", e);
+                setAutosaveNote("Speichern fehlgeschlagen.");
+            }
+        }
+
+        function setAutosaveNote(text) {
+            const el = document.getElementById("autosaveNote");
+            if (!el) return;
+            el.textContent = text;
+            setTimeout(() => {
+                el.textContent = "Änderungen werden automatisch gespeichert.";
+            }, 2000);
+        }
+
+        /* ===========================
+         * Rendering
+         * =========================== */
+        function renderAll() {
+            // Stichwort + Einsatzdatum aktualisieren
+            const stichwortInput = document.getElementById("stichwort");
+            const datumInput = document.getElementById("einsatzDatum");
+
+            if (stichwortInput) stichwortInput.value = state.stichwort || "";
+            if (datumInput) datumInput.value = state.einsatzDatum || new Date().toISOString().split("T")[0];
+
+            renderGroups();
+            renderMore();
+            updateTotals();
+        }
+
+        function renderGroups() {
+            const wrap = document.getElementById("groups");
+            wrap.innerHTML = "";
+            state.groups.forEach(group => {
+                const det = document.createElement("details");
+                det.open = true;
+                det.className = "panel";
+                det.setAttribute("data-group-id", group.id);
+
+                const editable = !!group.editable;
+
+                det.innerHTML = `
+              <div style="overflow:auto; margin-top:6px">
+                <table>
+                  <thead>
+                  <tr>
+                      <th style="width:200px"><h2>${escapeHTML(group.name)}</h2></th>
+                      <th style="width:200px"><h2>${escapeHTML(group.funkrufname)}</h2></th>
+                      <th style="width:70px"></th>
+                      <th style="width:100px"></th>
+                      <th style="width:20px"></th>
+                      <th style="width:100px"></th>
+                      <th style="width:100px"></th>
+                    </tr>
+                    <tr>
+                      <th style="width:200px">Fahrzeug</th>
+                      <th style="width:200px">Funkrufname</th>
+                      <th style="width:70px"></th>
+                      <th style="width:100px">Besatzung</th>
+                      <th style="width:20px"></th>
+                      <th style="width:100px"></th>
+                      <th style="width:100px">AGT</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    ${group.vehicles.map(v => `
+                      <tr data-vid="${v.id}">
+                        <td>
+                          ${editable
+                        ? `<input type="text" value="${escapeHTML(v.vehicle || "")}" data-vehicle-field="vehicle" />`
+                        : `${escapeHTML(v.vehicle || "")}`
+                    }
+                        </td>
+                        <td>
+                          ${editable
+                        ? `<input type="text" value="${escapeHTML(v.funkrufname || "")}" data-vehicle-field="funkrufname" />`
+                        : `${escapeHTML(v.funkrufname || "")}`
+                    }
+                        </td>
+                        <td style="text-align:center">
+                          <input type="checkbox" ${v.present ? "checked" : ""} data-vehicle-field="present" />
+                        </td>
+                        <td><input type="number" min="0" step="1" value="${Number(v.crew1 || 0)}" data-vehicle-field="crew1" /></td>
+                        <td style="text-align:center">/</td>
+                        <td><input type="number" min="0" step="1" value="${Number(v.crew2 || 0)}" data-vehicle-field="crew2" /></td>
+                        <td><input type="number" min="0" step="1" value="${Number(v.agt || 0)}" data-vehicle-field="agt" /></td>
+                      </tr>
+                    `).join("")}
+                  </tbody>
+                </table>
+              </div>
+              <div style="margin-top:8px; display:flex; justify-content:flex-start; gap:8px; flex-wrap:wrap">
+                ${editable
+                        ? `<button class="btn" data-add-vehicle="${group.id}">Fahrzeug hinzufügen</button>`
+                        : ``
+                    }
+              </div>
+            `;
+                wrap.appendChild(det);
+            });
+        }
+
+        function renderMore() {
+            const tbody = document.getElementById("moreTbody");
+            if (!tbody) return;
+            if (!state.more.length) {
+                tbody.innerHTML = `<tr><td colspan="3" class="muted">Keine weiteren Kräfte erfasst.</td></tr>`;
+                return;
+            }
+            tbody.innerHTML = state.more.map((m, idx) => `
+            <tr data-more-idx="${idx}">
+              <td><input type="text" value="${escapeHTML(m.name || "")}" data-more-field="name" /></td>
+              <td><textarea data-more-field="note">${escapeHTML(m.note || "")}</textarea></td>
+              <td style="text-align:right">
+                <button class="btn btn-danger" data-del-more="${idx}">Entfernen</button>
+              </td>
+            </tr>
+          `).join("");
+        }
+
+        /* ===========================
+         * Totals
+         * =========================== */
+        function computeTotals() {
+            let vehiclesOnSite = 0;
+            let totalCrew = 0;
+            let totalAGT = 0;
+
+            state.groups.forEach(g => {
+                g.vehicles.forEach(v => {
+                    if (v.present) vehiclesOnSite++;
+                    totalCrew += (Number(v.crew1 || 0) + Number(v.crew2 || 0));
+                    totalAGT += Number(v.agt || 0);
+                });
+            });
+
+            return { vehiclesOnSite, totalCrew, totalAGT };
+        }
+
+        function updateTotals() {
+            const t = computeTotals();
+            document.getElementById("totalVehiclesOnSite").textContent = t.vehiclesOnSite;
+            document.getElementById("totalCrew").textContent = t.totalCrew;
+            document.getElementById("totalAGT").textContent = t.totalAGT;
+        }
+
+        /* ===========================
+         * Events: Eingaben
+         * =========================== */
+        function handleFieldChange(e) {
+            const t = e.target;
+            // Fahrzeug-/Gruppenfelder
+            if (t.matches("[data-vehicle-field]")) {
+                const details = t.closest("[data-group-id]");
+                const tr = t.closest("tr[data-vid]");
+                if (!details || !tr) return;
+                const gid = details.getAttribute("data-group-id");
+                const vid = tr.getAttribute("data-vid");
+                const group = state.groups.find(g => g.id === gid);
+                if (!group) return;
+                const veh = group.vehicles.find(v => v.id === vid);
+                if (!veh) return;
+
+                const field = t.getAttribute("data-vehicle-field");
+                if (field === "present") {
+                    veh.present = t.checked;
+                } else if (field === "crew1" || field === "crew2" || field === "agt") {
+                    veh[field] = Number(t.value || 0);
+                } else if (field === "vehicle" || field === "funkrufname") {
+                    // Fahrzeug/Funkrufname änderbar nur in editierbaren Gruppen – Inputs gibt es nur dort
+                    veh[field] = t.value;
+                }
+                updateTotals();
+                saveState();
+                return;
+            }
+
+            // Weitere Kräfte
+            if (t.matches("[data-more-field]")) {
+                const row = t.closest("tr[data-more-idx]");
+                if (!row) return;
+                const idx = Number(row.getAttribute("data-more-idx"));
+                const item = state.more[idx];
+                if (!item) return;
+                const field = t.getAttribute("data-more-field");
+                item[field] = t.value;
+                saveState();
+                return;
+            }
+        }
+        document.addEventListener("input", e => {
+            if (e.target.id === "stichwort") {
+                state.stichwort = e.target.value;
+                saveState();
+            }
+        });
+
+        document.addEventListener("change", e => {
+            if (e.target.id === "einsatzDatum") {
+                state.einsatzDatum = e.target.value;
+                saveState();
+            }
+        });
+
+        document.addEventListener("input", handleFieldChange);
+        document.addEventListener("change", handleFieldChange);
+
+        /* Enter → nächstes Feld */
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" && !e.shiftKey && e.target.matches("input, textarea, select")) {
+                e.preventDefault();
+                const focusables = Array.from(document.querySelectorAll("input, textarea, select, button"))
+                    .filter(el => !el.disabled && el.type !== "hidden" && el.offsetParent !== null);
+                const idx = focusables.indexOf(e.target);
+                if (idx >= 0 && idx < focusables.length - 1) {
+                    const next = focusables[idx + 1];
+                    next.focus();
+                    if (typeof next.select === "function" && next.tagName === "INPUT") {
+                        next.select();
+                    }
+                }
+            }
+        });
+
+        /* ===========================
+         * Buttons: Gruppen, More, Save, Reset
+         * =========================== */
+
+        document.addEventListener("click", (e) => {
+            const btn = e.target;
+
+            // Fahrzeug hinzufügen (nur in editierbaren Gruppen)
+            const addGroupId = btn.getAttribute && btn.getAttribute("data-add-vehicle");
+            if (addGroupId) {
+                const group = state.groups.find(g => g.id === addGroupId);
+                if (group) {
+                    const newId = addGroupId + "-" + (Date.now());
+                    group.vehicles.push({
+                        id: newId, vehicle: "", funkrufname: "", present: false, crew1: 0, crew2: 0, agt: 0
+                    });
+                    saveState();
+                    renderAll();
+                }
+                return;
+            }
+
+            // Weitere Kraft entfernen
+            const delIdx = btn.getAttribute && btn.getAttribute("data-del-more");
+            if (delIdx !== null && delIdx !== undefined) {
+                state.more.splice(Number(delIdx), 1);
+                saveState();
+                renderMore();
+                return;
+            }
+        });
+
+        //document.getElementById("btnAddMore").addEventListener("click", () => {
+        //    state.more.push({ name: "", note: "" });
+        //    saveState();
+        //    renderMore();
+        //});
+
+        document.getElementById("btnSave").addEventListener("click", saveState);
+
+        document.getElementById("btnReset").addEventListener("click", () => {
+            if (confirm("Wirklich alle Eingaben löschen und auf Ausgangszustand zurücksetzen?")) {
+                state = cloneInitial();
+                saveState();
+                renderAll();
+            }
+        });
+
+        /* ===========================
+         * PDF / Druck
+         * =========================== */
+        document.getElementById("btnPrint").addEventListener("click", () => {
+            buildReport();
+            window.print();
+        });
+        function formatDateDE(dateStr) {
+            if (!dateStr) return "-";
+            const [y, m, d] = dateStr.split("-");
+            if (!y || !m || !d) return dateStr;
+            return `${d}.${m}.${y}`;
+        }
+
+        function buildReport() {
+            const rc = document.getElementById("reportContent");
+            rc.innerHTML = "";
+            // Einsatzinfos
+            const info = document.createElement("div");
+            info.className = "panel";
+            info.style.background = "white";
+            info.style.color = "black";
+            info.style.border = "1px solid #bbb";
+            info.style.margin = "10px 0";
+            info.innerHTML = `
+  <table class="print-table">
+    <tr><th style="width:120px">Alarmstichwort:</th><td>${escapeHTML(state.stichwort || "-")}</td></tr>
+    <tr><th>Einsatzdatum:</th><td>${escapeHTML(formatDateDE(state.einsatzDatum) || "-")}</td></tr>
+  </table>
+`;
+            rc.appendChild(info);
+
+            
+
+            // Gemeinsame Fahrzeugtabelle mit einer Kopfzeile
+            let rowsHtml = "";
+            state.groups.forEach(g => {
+                // Gruppen-Zeile
+                rowsHtml += `
+          <tr class="group-row">
+            <td>${escapeHTML(g.name)}</td>
+            <td>${escapeHTML(g.funkrufname)}</td>
+            <td colspan="3"></td>
+          </tr>
+        `;
+                // Fahrzeuge der Gruppe
+                g.vehicles.forEach(v => {
+                    rowsHtml += `
+            <tr>
+              <td style="width:200px">${escapeHTML(v.vehicle || "")}</td>
+              <td style="width:200px" style="text-align:left">${escapeHTML(v.funkrufname || "")}</td>
+              <td style="width:50px" style="text-align:center">${v.present ? "✓" : ""}</td>
+              <td style="width:100px" style="text-align:right">${Number(v.crew1 || 0)} / ${Number(v.crew2 || 0)}</td>
+              <td style="width:50px" style="text-align:right">${Number(v.agt || 0)}</td>
+            </tr>
+          `;
+                });
+            });
+
+            const vehBox = document.createElement("div");
+            vehBox.className = "panel";
+            vehBox.style.background = "white";
+            vehBox.style.color = "black";
+            vehBox.style.border = "1px solid #bbb";
+            vehBox.style.margin = "5px 0";
+            vehBox.innerHTML = `
+        <table class="print-table">
+          <thead>
+            <tr>
+              <th style="width:200px">Fahrzeug</th>
+              <th style="width:200px" style="text-align:left">Funkrufname</th>
+              <th style="width:50px" style="text-align:center"></th>
+              <th style="width:100px" style="text-align:right">Besatzung</th>
+              <th style="width:50px" style="text-align:right">AGT</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${rowsHtml}
+          </tbody>
+        </table>
+      `;
+            rc.appendChild(vehBox);
+
+            // Gesamtsumme (unverändert, aber ohne Tabellenlinien)
+            const t = computeTotals();
+            const totals = document.createElement("div");
+            totals.className = "panel";
+            totals.style.background = "white";
+            totals.style.color = "black";
+            totals.style.border = "1px solid #bbb";
+            totals.style.margin = "5px 0";
+            totals.innerHTML = `
+        <h3 style="margin:0 0 6px 0">Gesamtsumme</h3>
+        <div>Fahrzeuge vor Ort: <strong>${t.vehiclesOnSite}</strong></div>
+        <div>Besatzung gesamt (beide Felder): <strong>${t.totalCrew}</strong></div>
+        <div>AGT gesamt: <strong>${t.totalAGT}</strong></div>
+      `;
+            rc.appendChild(totals);
+
+    //        // Weitere Kräfte (ebenfalls ohne Linien in der Tabelle)
+    //        const moreBox = document.createElement("div");
+    //        moreBox.className = "panel";
+    //        moreBox.style.background = "white";
+    //        moreBox.style.color = "black";
+    //        moreBox.style.border = "1px solid #bbb";
+    //        moreBox.style.margin = "5px 0";
+    //        moreBox.innerHTML = `
+    //    <h3 style="margin:0 0 6px 0">Weitere Kräfte (nicht in Gesamtsumme enthalten)</h3>
+    //    <table class="print-table">
+    //      <thead>
+    //        <tr>
+    //          <th>Name</th><th>Notizen</th>
+    //        </tr>
+    //      </thead>
+    //      <tbody>
+    //        ${state.more.length
+    //                ? state.more.map(m => `
+    //              <tr>
+    //                <td>${escapeHTML(m.name || "")}</td>
+    //                <td>${escapeHTML(m.note || "")}</td>
+    //              </tr>
+    //            `).join("")
+    //                : `<tr><td colspan="2">–</td></tr>`
+    //            }
+    //      </tbody>
+    //    </table>
+    //  `;
+    //        rc.appendChild(moreBox);
+
+            document.getElementById("reportDate").textContent =
+                new Date().toLocaleString(undefined, { dateStyle: "medium", timeStyle: "short" });
+        }
+
+
+        /* ===========================
+         * Helper
+         * =========================== */
+        function escapeHTML(s) {
+            return String(s).replace(/[&<>"']/g, c => (
+                { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }[c]
+            ));
+        }
+
+        /* Initiales Rendern */
+        renderAll();
+    </script>
+</body>
+</html>
