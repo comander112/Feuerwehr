@@ -534,7 +534,7 @@
 
                 det.innerHTML = `
                 <summary>
-                    <span class="group-title"></span>
+                    <span class="group-title">${escapeHTML(group.name)}</span>
                     <span class="collapsed-label">${escapeHTML(group.name)}</span>
                 </summary>
               <div style="overflow:auto; margin-top:6px">
@@ -882,6 +882,7 @@
     </script>
 </body>
 </html>
+
 
 
 
