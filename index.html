@@ -524,10 +524,11 @@
             const wrap = document.getElementById("groups");
             wrap.innerHTML = "";
             state.groups.forEach(group => {
-                const det = document.createElement("details");
+                const det = document.createElement("detail");
                 det.open = true;
                 det.className = "panel";
                 det.setAttribute("data-group-id", group.id);
+                det.title = group.name
 
                 const editable = !!group.editable;
 
@@ -877,6 +878,7 @@
     </script>
 </body>
 </html>
+
 
 
 
