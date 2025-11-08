@@ -399,7 +399,7 @@
                     editable: false,
                     vehicles: [
                         { id: "ds-01", vehicle: "MTF", funkrufname: "Da-Schau 1/19-1", present: false, crew1: 0, crew2: 0, agt: 0 },
-                        { id: "ds-02", vehicle: "DLK 18/12", funkrufname: "Da-Schau 1/33-1", present: false, crew1: 0, crew2: 0, agt: 0 },
+                        { id: "ds-02", vehicle: "DLK 23/12", funkrufname: "Da-Schau 1/34-1", present: false, crew1: 0, crew2: 0, agt: 0 },
                         { id: "ds-03", vehicle: "LF 8/6", funkrufname: "Da-Schau 1/44-1", present: false, crew1: 0, crew2: 0, agt: 0 },
                         { id: "ds-04", vehicle: "LF 16/12", funkrufname: "Da-Schau 1/45-1", present: false, crew1: 0, crew2: 0, agt: 0 },
                         { id: "ds-05", vehicle: "MZF 2", funkrufname: "Da-Schau 1/72-1", present: false, crew1: 0, crew2: 0, agt: 0 },
@@ -524,7 +524,7 @@
             const wrap = document.getElementById("groups");
             wrap.innerHTML = "";
             state.groups.forEach(group => {
-                const det = document.createElement("details");
+                const det = document.createElement("${escapeHTML(group.name)}");
                 det.open = true;
                 det.className = "panel";
                 det.setAttribute("data-group-id", group.id);
@@ -877,6 +877,7 @@
     </script>
 </body>
 </html>
+
 
 
 
