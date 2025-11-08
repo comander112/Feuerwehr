@@ -529,12 +529,14 @@
                 det.className = "panel";
                 det.setAttribute("data-group-id", group.id);
                 const editable = !!group.editable;
-                //<summary>
-                //   <span class="group-title">${escapeHTML(group.name)}</span>
-                //    <span class="collapsed-label">${escapeHTML(group.name)}</span>
-                //</summary>
+                const summery = document.createElement("summary");
+                summary.innerHTML = '
+                   <span class="group-title">${escapeHTML(group.name)}</span>
+                    <span class="collapsed-label">${escapeHTML(group.name)}</span>
+                    <span class="open-label">${escapeHTML(group.name)}</span>
+            ';
+                det.appendChild(summary);
                 det.innerHTML = `
-                
               <div style="overflow:auto; margin-top:6px">
                 <table>
                   <thead>
@@ -880,6 +882,7 @@
     </script>
 </body>
 </html>
+
 
 
 
