@@ -533,6 +533,8 @@
                 const editable = !!group.editable;
 
                 det.innerHTML = `
+                <summary class="group-title"></span>
+                <summary class="collapsed-label">${escapeHTML(group.name)}</span>
               <div style="overflow:auto; margin-top:6px">
                 <table>
                   <thead>
@@ -878,6 +880,7 @@
     </script>
 </body>
 </html>
+
 
 
 
