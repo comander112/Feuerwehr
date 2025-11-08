@@ -858,43 +858,10 @@
             totals.innerHTML = `
         <h3 style="margin:0 0 6px 0">Gesamtsumme</h3>
         <div>Fahrzeuge vor Ort: <strong>${t.vehiclesOnSite}</strong></div>
-        <div>Besatzung gesamt (beide Felder): <strong>${t.totalCrew}</strong></div>
+        <div>Besatzung gesamt: <strong>${t.totalCrew}</strong></div>
         <div>AGT gesamt: <strong>${t.totalAGT}</strong></div>
       `;
             rc.appendChild(totals);
-
-    //        // Weitere Kräfte (ebenfalls ohne Linien in der Tabelle)
-    //        const moreBox = document.createElement("div");
-    //        moreBox.className = "panel";
-    //        moreBox.style.background = "white";
-    //        moreBox.style.color = "black";
-    //        moreBox.style.border = "1px solid #bbb";
-    //        moreBox.style.margin = "5px 0";
-    //        moreBox.innerHTML = `
-    //    <h3 style="margin:0 0 6px 0">Weitere Kräfte (nicht in Gesamtsumme enthalten)</h3>
-    //    <table class="print-table">
-    //      <thead>
-    //        <tr>
-    //          <th>Name</th><th>Notizen</th>
-    //        </tr>
-    //      </thead>
-    //      <tbody>
-    //        ${state.more.length
-    //                ? state.more.map(m => `
-    //              <tr>
-    //                <td>${escapeHTML(m.name || "")}</td>
-    //                <td>${escapeHTML(m.note || "")}</td>
-    //              </tr>
-    //            `).join("")
-    //                : `<tr><td colspan="2">–</td></tr>`
-    //            }
-    //      </tbody>
-    //    </table>
-    //  `;
-    //        rc.appendChild(moreBox);
-
-            //document.getElementById("reportDate").textContent =
-             //   new Date().toLocaleString(undefined, { dateStyle: "medium", timeStyle: "short" });
         }
 
 
@@ -912,4 +879,5 @@
     </script>
 </body>
 </html>
+
 
