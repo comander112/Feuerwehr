@@ -524,7 +524,7 @@
             const wrap = document.getElementById("groups");
             wrap.innerHTML = "";
             state.groups.forEach(group => {
-                const det = document.createElement("${escapeHTML(group.name)}");
+                const det = document.createElement(${escapeHTML(group.name)});
                 det.open = true;
                 det.className = "panel";
                 det.setAttribute("data-group-id", group.id);
@@ -877,6 +877,7 @@
     </script>
 </body>
 </html>
+
 
 
 
