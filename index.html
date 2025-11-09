@@ -537,18 +537,18 @@
                 det.setAttribute("data-group-id", group.id);
                 const editable = !!group.editable;
                 const summary = document.createElement("summary");
-                summary.classname = "group-header";
+                summary.className = "group-header";
                 
                 const h2 = document.createElement("h2");
                 h2.textContent = group.name;
 
                 const actions = document.createElement("span");
-                actions.classname = "group-actions";
-                actions.immerHTML = '';
-                summary.appenChild(h2);
+                actions.className = "group-actions";
+                actions.innerHTML = "";
+                summary.appendChild(h2);
                 summary.appendChild(actions);
                 det.appendChild(summary);
-                det.innerHTML = '
+                det.innerHTML = `
               <div style="overflow:auto; margin-top:6px">
                 <table>
                   <thead>
@@ -894,6 +894,7 @@
     </script>
 </body>
 </html>
+
 
 
 
