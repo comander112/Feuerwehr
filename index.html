@@ -542,17 +542,13 @@
                 const h2 = document.createElement("h2");
                 h2.textContent = group.name;
 
-                const actions = document.createElement(span");
-                actions.classname = "group-actioms";
+                const actions = document.createElement("span");
+                actions.classname = "group-actions";
                 actions.immerHTML = '';
                 summary.appenChild(h2);
                 summary.appendChild(actions);
                 det.appendChild(summary);
-                det.innerHTML = `
-                <summary class="group-header">
-                    <h2>${escapeHTML(group.name)}</h2>
-                    <span class="collapsed-label">(anzeigen)</span>
-                </summary>
+                det.innerHTML = '
               <div style="overflow:auto; margin-top:6px">
                 <table>
                   <thead>
@@ -898,6 +894,7 @@
     </script>
 </body>
 </html>
+
 
 
 
