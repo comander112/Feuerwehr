@@ -551,7 +551,21 @@
                 //det.appendChild(summary);
                 det.innerHTML = `
                 <summary class="group-header">
-                    <h2>${escapeHTML(group.name)}</h2>
+                    <h2>
+                    <table>
+                      <thead>
+                          <tr>
+                              <th style="width:200px"><h2>${escapeHTML(group.name)}</h2></th>
+                              <th style="width:200px"><h2>${escapeHTML(group.funkrufname)}</h2></th>
+                              <th style="width:70px"></th>
+                              <th style="width:100px"></th>
+                              <th style="width:20px"></th>
+                              <th style="width:100px"></th>
+                              <th style="width:100px"></th>
+                            </tr>
+                        </thead>
+                    </table>
+                    </h2>
                     <!--<span class="group-header">
                         <span class="collapsed-label">(anzeigen)</span>                        
                     </span>-->
@@ -902,6 +916,7 @@
     </script>
 </body>
 </html>
+
 
 
 
