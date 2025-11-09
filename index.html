@@ -534,19 +534,29 @@
                 det.className = "panel";
                 det.setAttribute("data-group-id", group.id);
                 const editable = !!group.editable;
-                const summary = document.createElement("summary");
-                summary.className = "group-header";
+                //const summary = document.createElement("summary");
+                //summary.className = "group-header";
                 
-                const h2 = document.createElement("h2");
-                h2.textContent = group.name;
+                //const h2 = document.createElement("h2");
+                //h2.textContent = group.name;
 
-                const actions = document.createElement("span");
-                actions.className = "group-actions";
-                actions.innerHTML = "";
-                summary.appendChild(h2);
-                summary.appendChild(actions);
-                det.appendChild(summary);
+                //const actions = document.createElement("span");
+                //actions.className = "group-actions";
+                //actions.innerHTML = "";
+                //const actions2 = document.createElement("span");
+                //actions.className = "collapse
+                
+                //summary.appendChild(h2);
+                //summary.appendChild(actions);
+                //det.appendChild(summary);
                 det.innerHTML = `
+                <summary class="group-header">
+                    <h2>${escapeHTML(group.name)}</h2>
+                    <span class="group-header">
+                        <span class="collapsed-label">(anzeigen)</span>                        
+                    </span>
+                </summary>
+                
               <div style="overflow:auto; margin-top:6px">
                 <table>
                   <thead>
@@ -892,6 +902,7 @@
     </script>
 </body>
 </html>
+
 
 
 
