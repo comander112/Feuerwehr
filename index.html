@@ -536,6 +536,18 @@
                 det.className = "panel";
                 det.setAttribute("data-group-id", group.id);
                 const editable = !!group.editable;
+                const summary = document.createElement("summary");
+                summary.classname = "group-header";
+                
+                const h2 = document.createElement("h2");
+                h2.textContent = group.name;
+
+                const actions = document.createElement(span");
+                actions.classname = "group-actioms";
+                actions.immerHTML = '';
+                summary.appenChild(h2);
+                summary.appendChild(actions);
+                det.appendChild(summary);
                 det.innerHTML = `
                 <summary class="group-header">
                     <h2>${escapeHTML(group.name)}</h2>
@@ -886,6 +898,7 @@
     </script>
 </body>
 </html>
+
 
 
 
