@@ -19,12 +19,12 @@
     <link rel="apple-touch-icon" sizes="180x180" href="img/icon-180.png">
 
     <style>
-        * {
-            touch-action: manipulation;
-        }
-        button, input {
-            touch-action: manipulation;
-        }
+		* {
+			touch-action:manipulation;
+		}
+		button, input {
+			touch-action: manipulation;
+		}
         :root {
             --bg: #0b0f14;
             --panel: #121820;
@@ -411,11 +411,11 @@
                     funkrufname: "Da-Schau 100",
                     editable: false,
                     vehicles: [
-                        { id: "ds-01", vehicle: "MTF", funkrufname: "Da-Schau 1/19-1", present: false, crew1: 0, crew2: 0, agt: 0 },
-                        { id: "ds-02", vehicle: "DLK 23/12", funkrufname: "Da-Schau 1/34-1", present: false, crew1: 0, crew2: 0, agt: 0 },
-                        { id: "ds-03", vehicle: "LF 8/6", funkrufname: "Da-Schau 1/44-1", present: false, crew1: 0, crew2: 0, agt: 0 },
-                        { id: "ds-04", vehicle: "LF 16/12", funkrufname: "Da-Schau 1/45-1", present: false, crew1: 0, crew2: 0, agt: 0 },
-                        { id: "ds-05", vehicle: "MZF 2", funkrufname: "Da-Schau 1/72-1", present: false, crew1: 0, crew2: 0, agt: 0 },
+                        { id: "ds-01", vehicle: "MTF", funkrufname: "Da-Schau 1/19-1", present: false, crew1: 0, crew2: 0, agt: 0 ,  maxcrew:9},
+                        { id: "ds-02", vehicle: "DLK 23/12", funkrufname: "Da-Schau 1/34-1", present: false, crew1: 0, crew2: 0, agt: 0 ,  maxcrew:3},
+                        { id: "ds-03", vehicle: "LF 8/6", funkrufname: "Da-Schau 1/44-1", present: false, crew1: 0, crew2: 0, agt: 0 ,  maxcrew:9},
+                        { id: "ds-04", vehicle: "LF 16/12", funkrufname: "Da-Schau 1/45-1", present: false, crew1: 0, crew2: 0, agt: 0 ,  maxcrew:9},
+                        { id: "ds-05", vehicle: "MZF 2", funkrufname: "Da-Schau 1/72-1", present: false, crew1: 0, crew2: 0, agt: 0  ,  maxcrew:3},
 
                     ]
                 },
@@ -425,11 +425,11 @@
                     funkrufname: "Da-Schau 2",
                     editable: false,
                     vehicles: [
-                        { id: "ha-01", vehicle: "MTF", funkrufname: "Da-Schau 2/19-1", present: false, crew1: 0, crew2: 0, agt: 0 },
-                        { id: "ha-02", vehicle: "TSF-W", funkrufname: "Da-Schau 2/42-1", present: false, crew1: 0, crew2: 0, agt: 0 },
-                        { id: "ha-03", vehicle: "LF 16-TS", funkrufname: "Da-Schau 2/43-1", present: false, crew1: 0, crew2: 0, agt: 0 },
-                        { id: "ha-04", vehicle: "RW 1", funkrufname: "Da-Schau 2/51-1", present: false, crew1: 0, crew2: 0, agt: 0 },
-                        { id: "ha-05", vehicle: "SW 2000", funkrufname: "Da-Schau 2/68-1", present: false, crew1: 0, crew2: 0, agt: 0 },
+                        { id: "ha-01", vehicle: "MTF", funkrufname: "Da-Schau 2/19-1", present: false, crew1: 0, crew2: 0, agt: 0 ,  maxcrew:9},
+                        { id: "ha-02", vehicle: "TSF-W", funkrufname: "Da-Schau 2/42-1", present: false, crew1: 0, crew2: 0, agt: 0 ,  maxcrew:6},
+                        { id: "ha-03", vehicle: "LF 16-TS", funkrufname: "Da-Schau 2/43-1", present: false, crew1: 0, crew2: 0, agt: 0 ,  maxcrew:9},
+                        { id: "ha-04", vehicle: "RW 1", funkrufname: "Da-Schau 2/51-1", present: false, crew1: 0, crew2: 0, agt: 0 ,  maxcrew:3},
+                        { id: "ha-05", vehicle: "SW 2000", funkrufname: "Da-Schau 2/68-1", present: false, crew1: 0, crew2: 0, agt: 0 ,  maxcrew:3},
 
                     ]
                 },
@@ -439,8 +439,8 @@
                     funkrufname: "Da-Schau 3",
                     editable: false,
                     vehicles: [
-                        { id: "r-01", vehicle: "ELW 1", funkrufname: "Da-Schau 3/11-1", present: false, crew1: 0, crew2: 0, agt: 0 },
-                        { id: "r-02", vehicle: "LF 16/12", funkrufname: "Da-Schau 3/45-1", present: false, crew1: 0, crew2: 0, agt: 0 },
+                        { id: "r-01", vehicle: "ELW 1", funkrufname: "Da-Schau 3/11-1", present: false, crew1: 0, crew2: 0, agt: 0 ,  maxcrew:5},
+                        { id: "r-02", vehicle: "LF 16/12", funkrufname: "Da-Schau 3/45-1", present: false, crew1: 0, crew2: 0, agt: 0 ,  maxcrew:9},
                     ]
                 },
                 {
@@ -449,9 +449,9 @@
                     funkrufname: "Da-Schau 4",
                     editable: false,
                     vehicles: [
-                        { id: "g-01", vehicle: "MTF", funkrufname: "Da-Schau 4/19-1", present: false, crew1: 0, crew2: 0, agt: 0 },
-                        { id: "g-02", vehicle: "TSF-W", funkrufname: "Da-Schau 4/42-1", present: false, crew1: 0, crew2: 0, agt: 0 },
-                        { id: "g-03", vehicle: "MZF-G", funkrufname: "Da-Schau 4/73-1", present: false, crew1: 0, crew2: 0, agt: 0 },
+                        { id: "g-01", vehicle: "MTF", funkrufname: "Da-Schau 4/19-1", present: false, crew1: 0, crew2: 0, agt: 0 ,  maxcrew:9},
+                        { id: "g-02", vehicle: "TSF-W", funkrufname: "Da-Schau 4/42-1", present: false, crew1: 0, crew2: 0, agt: 0 ,  maxcrew:6},
+                        { id: "g-03", vehicle: "MZF-G", funkrufname: "Da-Schau 4/73-1", present: false, crew1: 0, crew2: 0, agt: 0 ,  maxcrew:6},
                     ]
                 },
                 {
@@ -460,9 +460,9 @@
                     funkrufname: "",
                     editable: true,
                     vehicles: [
-                        { id: "w-01", vehicle: "RTW", funkrufname: "", present: false, crew1: 0, crew2: 0, agt: 0 },
-                        { id: "w-02", vehicle: "NEF", funkrufname: "", present: false, crew1: 0, crew2: 0, agt: 0 },
-                        { id: "w-03", vehicle: "Polizei", funkrufname: "", present: false, crew1: 0, crew2: 0, agt: 0 },
+                        { id: "w-01", vehicle: "RTW", funkrufname: "", present: false, crew1: 0, crew2: 0, agt: 0 ,  maxcrew:9},
+                        { id: "w-02", vehicle: "NEF", funkrufname: "", present: false, crew1: 0, crew2: 0, agt: 0 ,  maxcrew:9},
+                        { id: "w-03", vehicle: "Polizei", funkrufname: "", present: false, crew1: 0, crew2: 0, agt: 0 ,  maxcrew:9},
                     ]
                 }
             ],
@@ -610,7 +610,7 @@
                         <td>
 							<div class="stepper">
 								<button type="button" class="step-btn" data-step="-1">-</button>
-								<input type="number" min="0" max="8" step="1" value="${Number(v.crew1 || 0)}" data-vehicle-field="crew1" class="step-input"/>
+								<input type="number" min="0" max="${Number(v.maxcrew || 0)}" step="1" value="${Number(v.crew1 || 0)}" data-vehicle-field="crew1" class="step-input"/>
 								<button type="button" class="step-btn" data-step="1">+</button>
 							</div>
 						</td>
@@ -619,14 +619,14 @@
                         <td>
 							<div class="stepper">
 								<button type="button" class="step-btn" data-step="-1">-</button>
-								<input type="number" min="0" max="8" step="1" value="${Number(v.crew2 || 0)}" data-vehicle-field="crew2" class="step-input"/>
+								<input type="number" min="0" max="${Number(v.maxcrew || 0)}" step="1" value="${Number(v.crew2 || 0)}" data-vehicle-field="crew2" class="step-input"/>
 								<button type="button" class="step-btn" data-step="1">+</button>
 							</div>
 						</td>
                         <td>
 							<div class="stepper">
 								<button type="button" class="step-btn" data-step="-1">-</button>
-								<input type="number" min="0" max="8" step="1" value="${Number(v.agt || 0)}" data-vehicle-field="agt" class="step-input"/>
+								<input type="number" min="0" max="${Number(v.maxcrew || 0)}" step="1" value="${Number(v.agt || 0)}" data-vehicle-field="agt" class="step-input"/>
 								<button type="button" class="step-btn" data-step="1">+</button>
 							</div>
 						</td>
@@ -740,25 +740,34 @@
 			const input = wrapper.querySelector(".step-input");
 			let val = input.value === "" ? 0 : Number(input.value);
 			if (Number.isNaN(val)) val = 0;
-			const min = input.min !== "" ? Number(input.min) : -Infinity;
-			const max = input.max !== "" ? Number(input.max) : Infinity;
-			val = val + step;
-			if (val < min) val = min;
-			if (val > max) val = max;
-			input.value = val;
-			
 			const tr = input.closest("tr[data-vid]");
 			const details = input.closest("[data-group-id]");
 			if (!tr || !details) return;
 			const gid = details.getAttribute("data-group-id");
 			const vid = tr.getAttribute("data-vid");
-			
 			const group = state.groups.find(g => g.id === gid);
 			if (!group) return;
 			const veh = group.vehicles.find(v => v.id === vid);
 			if (!veh) return;
-			
 			const field = input.getAttribute("data-vehicle-field");
+			const min = input.min !== "" ? Number(input.min) : -Infinity;
+			const max = input.max !== "" ? Number(input.max) : Infinity;
+			let crew = 0;
+			if (field === "crew1") {
+				crew = veh["crew2"];
+			}
+			if (field === "crew2") {
+				crew = veh["crew1"];
+			}
+			
+			
+			val = val + step;
+			if (val + crew < min) val = min;
+			if (val + crew > max) val = max - crew;
+			if (val < 0) val = 0;
+			input.value = val;
+			
+			
 			if (field === "crew1" || field === "crew2" || field === "agt") {
 				veh[field] = val;
 			}
@@ -776,7 +785,38 @@
 				setTimeout(() => input.select(), 50);
 			}
 		});
-		
+
+		document.addEventListener("input", e=> {
+			const input = e.target;
+			if (!input.matches(".step-input")) return;
+			let val = input.value === "" ? 0 : Number(input.value);
+			if (Number.isNaN(val)) val = 0;
+			const tr = input.closest("tr[data-vid]");
+			const details = input.closest("[data-group-id]");
+			if (!tr || !details) return;
+			const gid = details.getAttribute("data-group-id");
+			const vid = tr.getAttribute("data-vid");
+			const group = state.groups.find(g => g.id === gid);
+			if (!group) return;
+			const veh = group.vehicles.find(v => v.id === vid);
+			if (!veh) return;
+			const field = input.getAttribute("data-vehicle-field");
+			const min = input.min !== "" ? Number(input.min) : -Infinity;
+			const max = input.max !== "" ? Number(input.max) : Infinity;
+			let crew = 0;
+			if (field === "crew1") {
+				crew = veh["crew2"];
+			}
+			if (field === "crew2") {
+				crew = veh["crew1"];
+			}
+			
+			if (val + crew < min) val = min;
+			if (val + crew > max) val = max - crew;
+			if (val < 0) val = 0;
+			input.value = val;
+		});
+
         /* Enter → nächstes Feld */
         document.addEventListener("keydown", (e) => {
             if (e.key === "Enter" && !e.shiftKey && e.target.matches("input, textarea, select")) {
@@ -808,7 +848,7 @@
                 if (group) {
                     const newId = addGroupId + "-" + (Date.now());
                     group.vehicles.push({
-                        id: newId, vehicle: "", funkrufname: "", present: false, crew1: 0, crew2: 0, agt: 0
+                        id: newId, vehicle: "", funkrufname: "", present: false, crew1: 0, crew2: 0, agt: 0, maxcrew: 9
                     });
                     saveState();
                     renderAll();
@@ -950,4 +990,3 @@
     </script>
 </body>
 </html>
-
