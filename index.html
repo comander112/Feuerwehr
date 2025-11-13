@@ -770,7 +770,13 @@
 
         document.addEventListener("input", handleFieldChange);
         document.addEventListener("change", handleFieldChange);
-
+		document.addEventListener("focusin", e =>  {
+			const input = e.target;
+			if (input.matches('input[type="number"]')) {
+				setTimeout(() => input.select(), 50);
+			}
+		});
+		
         /* Enter → nächstes Feld */
         document.addEventListener("keydown", (e) => {
             if (e.key === "Enter" && !e.shiftKey && e.target.matches("input, textarea, select")) {
@@ -944,3 +950,4 @@
     </script>
 </body>
 </html>
+
