@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-    <title>Feuerwehr – Fahrzeugerfassung</title>
+    <title>Kräfteübersicht</title>
 
     <!-- PWA Manifest -->
     <link rel="manifest" href="manifest.json">
@@ -18,8 +18,6 @@
     <!-- wichtig: wirklich vorhandene Datei in dieser Größe -->
     <link rel="apple-touch-icon" sizes="180x180" href="img/icon-180.png">
 
-
-    <title>Feuerwehr – Fahrzeugerfassung</title>
     <style>
         :root {
             --bg: #0b0f14;
@@ -32,6 +30,14 @@
             --border: #1e2733;
         }
 
+		input[type=number]::-webkit-inner-spin-button,
+		input[type=number]::-webkit-outer-spin-button {
+			-webkit-appearance:none;
+			margin:0;
+		}
+		input[type=number] {
+			-moz-appearance:textfield;
+		}
         * {
             box-sizing: border-box
         }
@@ -293,6 +299,23 @@
             }
         }
 
+		.stepper{
+			display:inline-flex;
+			align-items:center;
+			gap:4px;
+		}
+		.stepper .step-btn{
+			padding:4px 8px;
+			border-raius:6px;
+			border:1px solid var(--border);
+			background:#0f1620;
+			color:var(--text);
+			font-size:14px;
+		}
+		.stepper .step-input{
+			width:80px;
+			text-align:right;	
+		}
         /* Tabellen im Druck ohne Linien */
         .print-table {
             width: 100%;
@@ -318,7 +341,7 @@
 </head>
 <body>
     <header>
-        <h1>🚒 Fahrzeugerfassung</h1>
+        <h1>🚒 Kräfteübersicht</h1>
         <div class="buttons">
             <button class="btn btn-accent" id="btnPrint">PDF / Drucken</button>
             <button class="btn btn-primary" id="btnSave">Speichern</button>
@@ -359,32 +382,11 @@
             </div>
             <div class="autosave" id="autosaveNote">Änderungen werden automatisch gespeichert.</div>
         </div>
-        <!--
-        <div class="panel">
-
-    <div class="section-header">
-        <h3>Weitere Kräfte</h3>
-        <button class="btn" id="btnAddMore">Weitere Kraft hinzufügen</button>
-    </div>
-
-        <div style="overflow:auto">
-            <table>
-                <thead>
-                    <tr>
-                        <th style="width:220px">Name</th>
-                        <th>Notizen / Details</th>
-                        <th style="width:90px"></th>
-                    </tr>
-                </thead>
-                <tbody id="moreTbody"></tbody>
-            </table>
-        </div>
-        </div>-->
     </main>
 
     <!-- Druck-Ansicht -->
     <div id="report" style="max-width:1100px;margin:0 auto;padding:16px">
-        <h2>Fahrzeugerfassung – Übersicht</h2>
+        <h2>Kräfteübersicht</h2>
         <div id="reportContent"></div>
         </p>
     </div>
@@ -521,7 +523,6 @@
             if (datumInput) datumInput.value = state.einsatzDatum || new Date().toISOString().split("T")[0];
 
             renderGroups();
-            renderMore();
             updateTotals();
         }
 
@@ -600,10 +601,29 @@
                         <td style="text-align:center">
                           <input type="checkbox" ${v.present ? "checked" : ""} data-vehicle-field="present" />
                         </td>
-                        <td><input type="number" min="0" step="1" value="${Number(v.crew1 || 0)}" data-vehicle-field="crew1" /></td>
+                        <td>
+							<div class="stepper">
+								<button type="button" class="step-btn" data-step="-1">-</button>
+								<input type="number" min="0" max="8" step="1" value="${Number(v.crew1 || 0)}" data-vehicle-field="crew1" class="step-input"/>
+								<button type="button" class="step-btn" data-step="1">+</button>
+							</div>
+						</td>
+						
                         <td style="text-align:center">/</td>
-                        <td><input type="number" min="0" step="1" value="${Number(v.crew2 || 0)}" data-vehicle-field="crew2" /></td>
-                        <td><input type="number" min="0" step="1" value="${Number(v.agt || 0)}" data-vehicle-field="agt" /></td>
+                        <td>
+							<div class="stepper">
+								<button type="button" class="step-btn" data-step="-1">-</button>
+								<input type="number" min="0" max="8" step="1" value="${Number(v.crew2 || 0)}" data-vehicle-field="crew2" class="step-input"/>
+								<button type="button" class="step-btn" data-step="1">+</button>
+							</div>
+						</td>
+                        <td>
+							<div class="stepper">
+								<button type="button" class="step-btn" data-step="-1">-</button>
+								<input type="number" min="0" max="8" step="1" value="${Number(v.agt || 0)}" data-vehicle-field="agt" class="step-input"/>
+								<button type="button" class="step-btn" data-step="1">+</button>
+							</div>
+						</td>
                       </tr>
                     `).join("")}
                   </tbody>
@@ -620,24 +640,7 @@
             });
         }
 
-        function renderMore() {
-            const tbody = document.getElementById("moreTbody");
-            if (!tbody) return;
-            if (!state.more.length) {
-                tbody.innerHTML = `<tr><td colspan="3" class="muted">Keine weiteren Kräfte erfasst.</td></tr>`;
-                return;
-            }
-            tbody.innerHTML = state.more.map((m, idx) => `
-            <tr data-more-idx="${idx}">
-              <td><input type="text" value="${escapeHTML(m.name || "")}" data-more-field="name" /></td>
-              <td><textarea data-more-field="note">${escapeHTML(m.note || "")}</textarea></td>
-              <td style="text-align:right">
-                <button class="btn btn-danger" data-del-more="${idx}">Entfernen</button>
-              </td>
-            </tr>
-          `).join("");
-        }
-
+        
         /* ===========================
          * Totals
          * =========================== */
@@ -722,6 +725,43 @@
             }
         });
 
+		document.addEventListener("click", e=>{
+			const btn = e.target.closest(".step-btn");
+			if (!btn) return;
+			const step = Number(btn.dataset.step || 1);
+			const wrapper = btn.closest(".stepper");
+			if (!wrapper) return;
+			const input = wrapper.querySelector(".step-input");
+			let val = input.value === "" ? 0 : Number(input.value);
+			if (Number.isNaN(val)) val = 0;
+			const min = input.min !== "" ? Number(input.min) : -Infinity;
+			const max = input.max !== "" ? Number(input.max) : Infinity;
+			val = val + step;
+			if (val < min) val = min;
+			if (val > max) val = max;
+			input.value = val;
+			
+			const tr = input.closest("tr[data-vid]");
+			const details = input.closest("[data-group-id]");
+			if (!tr || !details) return;
+			const gid = details.getAttribute("data-group-id");
+			const vid = tr.getAttribute("data-vid");
+			
+			const group = state.groups.find(g => g.id === gid);
+			if (!group) return;
+			const veh = group.vehicles.find(v => v.id === vid);
+			if (!veh) return;
+			
+			const field = input.getAttribute("data-vehicle-field");
+			if (field === "crew1" || field === "crew2" || field === "agt") {
+				veh[field] = val;
+			}
+			
+			updateTotals();
+			saveState();
+				
+		});
+
         document.addEventListener("input", handleFieldChange);
         document.addEventListener("change", handleFieldChange);
 
@@ -769,16 +809,9 @@
             if (delIdx !== null && delIdx !== undefined) {
                 state.more.splice(Number(delIdx), 1);
                 saveState();
-                renderMore();
                 return;
             }
         });
-
-        //document.getElementById("btnAddMore").addEventListener("click", () => {
-        //    state.more.push({ name: "", note: "" });
-        //    saveState();
-        //    renderMore();
-        //});
 
         document.getElementById("btnSave").addEventListener("click", saveState);
 
@@ -905,34 +938,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
