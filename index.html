@@ -17,6 +17,8 @@
 
     <!-- wichtig: wirklich vorhandene Datei in dieser Größe -->
     <link rel="apple-touch-icon" sizes="180x180" href="img/icon-180.png">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
 
     <style>
 		* {
@@ -349,7 +351,7 @@
     <header>
         <h1>🚒 Kräfteübersicht</h1>
         <div class="buttons">
-            <button class="btn btn-accent" id="btnPrint">PDF / Drucken</button>
+            <button class="btn btn-accent" id="btnPrint">PDF</button>
             <button class="btn btn-primary" id="btnSave">Speichern</button>
             <button class="btn btn-danger" id="btnReset">Alles löschen</button>
         </div>
@@ -879,8 +881,9 @@
          * PDF / Druck
          * =========================== */
         document.getElementById("btnPrint").addEventListener("click", () => {
-            buildReport();
-            window.print();
+            saveReportAsPdfVector();
+			//buildReport();
+            //window.print();
         });
         function formatDateDE(dateStr) {
             if (!dateStr) return "-";
@@ -974,6 +977,128 @@
       `;
             rc.appendChild(totals);
         }
+		
+		function buildPdfFilename(){
+  const date = document.getElementById("einsatzdatum")?.value
+    ? document.getElementById("einsatzdatum").value.split("-").reverse().join(".")
+    : new Date().toLocaleDateString("de-DE");
+
+  const stichwort = document.getElementById("stichwort")?.value || "Einsatz";
+
+  return `${date}_${stichwort}.pdf`.replace(/\s+/g, "_");
+}
+
+		
+		function saveReportAsPdfVector() {
+  if (!window.jspdf || !window.jspdf.jsPDF) {
+    alert("jsPDF ist nicht geladen.");
+    return;
+  }
+  if (!window.jspdf.jsPDF.API.autoTable) {
+    alert("jsPDF autoTable ist nicht geladen.");
+    return;
+  }
+
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ orientation: "p", unit: "mm", format: "a4" });
+
+  const marginX = 10;
+  let y = 12;
+
+  // Kopf
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(14);
+  doc.text("🚒 Kräfteübersicht", marginX, y);
+  y += 8;
+
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(11);
+
+  const stichwort = state.stichwort || "-";
+  const datum = formatDateDE(state.einsatzDatum) || "-";
+
+  doc.text(`Alarmstichwort: ${stichwort}`, marginX, y); y += 6;
+  doc.text(`Einsatzdatum: ${datum}`, marginX, y); y += 6;
+
+  y += 2;
+
+  // Tabellen-Daten vorbereiten
+  const head = [["Fahrzeug", "Funkrufname", " ", "Besatzung", "AGT"]];
+  const body = [];
+
+  state.groups.forEach(g => {
+    // Gruppenzeile (fett)
+    body.push([
+      g.name || "",
+      (g.funkrufname || ""), // falls nicht vorhanden, bleibt leer
+      "",
+      "",
+      ""
+    ]);
+
+    g.vehicles.forEach(v => {
+      body.push([
+        v.vehicle || "",
+        v.funkrufname || "",
+        v.present ? "✓" : "",
+        `${Number(v.crew1 || 0)} / ${Number(v.crew2 || 0)}`,
+        String(Number(v.agt || 0))
+      ]);
+    });
+  });
+
+  // Tabelle (vektorbasiert, automatisch mehrseitig)
+  doc.autoTable({
+    head,
+    body,
+    startY: y,
+    margin: { left: marginX, right: marginX },
+    styles: {
+      font: "helvetica",
+      fontSize: 10,
+      cellPadding: 1.5,
+      overflow: "linebreak"
+    },
+    headStyles: {
+      fontStyle: "bold"
+    },
+    columnStyles: {
+      0: { cellWidth: 55 }, // Fahrzeug
+      1: { cellWidth: 55 }, // Funkrufname
+      2: { cellWidth: 8, halign: "center" }, // ✓
+      3: { cellWidth: 45, halign: "right" }, // Besatzung
+      4: { cellWidth: 17, halign: "right" }  // AGT
+    },
+    didParseCell: function (data) {
+      // Gruppenzeilen fett + leicht abgesetzt
+      if (data.section === "body") {
+        const row = data.row.raw;
+        const isGroupRow = row && row[2] === "" && row[3] === "" && row[4] === "" && row[0] && !row[0].includes("/") ;
+        // robustere Erkennung: Gruppenzeile hat nur Name, Rest leer
+        if (isGroupRow) {
+          data.cell.styles.fontStyle = "bold";
+          data.cell.styles.fillColor = [245, 245, 245];
+        }
+      }
+    }
+  });
+
+  // Gesamtsumme unter der Tabelle (auf letzter Seite)
+  const t = computeTotals();
+  const afterY = doc.lastAutoTable.finalY + 8;
+
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(12);
+  doc.text("Gesamtsumme", marginX, afterY);
+
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(11);
+  doc.text(`Fahrzeuge vor Ort: ${t.vehiclesOnSite}`, marginX, afterY + 6);
+  doc.text(`Besatzung gesamt: ${t.totalCrew}`, marginX, afterY + 12);
+  doc.text(`AGT gesamt: ${t.totalAGT}`, marginX, afterY + 18);
+
+  doc.save(buildPdfFilename());
+}
 
 
         /* ===========================
