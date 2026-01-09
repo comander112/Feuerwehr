@@ -988,8 +988,12 @@
   return `${date}_${stichwort}.pdf`.replace(/\s+/g, "_");
 }
 
+function canSharePdf() {
+	return !!navigator.share && navigator.canShare &&
+	      	navigator.canShare({ files: [new File([], "x.pdf", { type: "application/pdf" })] });
+}
 		
-function saveReportAsPdfVector() {
+async function saveReportAsPdfVector() {
   	if (!window.jspdf || !window.jspdf.jsPDF) {
     	alert("jsPDF ist nicht geladen.");
     	return;
@@ -1027,25 +1031,25 @@ function saveReportAsPdfVector() {
   	const body = [];
 
   	state.groups.forEach(g => {
-    // Gruppenzeile (fett)
-    body.push([
-      g.name || "",
-      (g.funkrufname || ""), // falls nicht vorhanden, bleibt leer
-      "",
-      "",
-      ""
-    ]);
+    	// Gruppenzeile (fett)
+    	body.push([
+    	  	g.name || "",
+    	  	(g.funkrufname || ""), // falls nicht vorhanden, bleibt leer
+    	  	"",
+     	 	"",
+     	 	""
+    	]);
 
-    g.vehicles.forEach(v => {
-      body.push([
-        v.vehicle || "",
-        v.funkrufname || "",
-        v.present ? "✓" : "",
-        `${Number(v.crew1 || 0)} / ${Number(v.crew2 || 0)}`,
-        String(Number(v.agt || 0))
-      ]);
-    });
-  });
+   	 	g.vehicles.forEach(v => {
+    	  	body.push([
+        		v.vehicle || "",
+        		v.funkrufname || "",
+        		v.present ? "✓" : "",
+        		`${Number(v.crew1 || 0)} / ${Number(v.crew2 || 0)}`,
+        		String(Number(v.agt || 0))
+      		]);
+    	});
+  	});
 
   // Tabelle (vektorbasiert, automatisch mehrseitig)
   doc.autoTable({
@@ -1105,8 +1109,8 @@ function saveReportAsPdfVector() {
   if (canSharePdf()) {
     await navigator.share({
       files: [file],
-      title: "Einsatzbericht",
-      text: "PDF Einsatzbericht"
+      title: "Kräfteübersicht",
+      text: "PDF Kräfteübersicht"
     });
   } else {
     // Fallback: normaler Download
@@ -1123,10 +1127,7 @@ function saveReportAsPdfVector() {
                 { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }[c]
             ));
         }
-		function canSharePdf() {
-  return !!navigator.share && navigator.canShare &&
-         navigator.canShare({ files: [new File([], "x.pdf", { type: "application/pdf" })] });
-}
+		
 
 
         /* Initiales Rendern */
@@ -1134,4 +1135,5 @@ function saveReportAsPdfVector() {
     </script>
 </body>
 </html>
+
 
