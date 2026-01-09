@@ -17,16 +17,18 @@
 
     <!-- wichtig: wirklich vorhandene Datei in dieser Größe -->
     <link rel="apple-touch-icon" sizes="180x180" href="img/icon-180.png">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
 
     <style>
-		* {
-			touch-action:manipulation;
-		}
-		button, input {
-			touch-action: manipulation;
-		}
+        * {
+            touch-action: manipulation;
+        }
+
+        button, input {
+            touch-action: manipulation;
+        }
+
         :root {
             --bg: #0b0f14;
             --panel: #121820;
@@ -38,25 +40,30 @@
             --border: #1e2733;
         }
 
-		input[type=number]::-webkit-inner-spin-button,
-		input[type=number]::-webkit-outer-spin-button {
-			-webkit-appearance:none;
-			margin:0;
-		}
-		input[type=number] {
-			-moz-appearance:textfield;
-		}
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+
         * {
             box-sizing: border-box
         }
-        .collapsed-label{
-            font-size:12px;
-            color:var(--muted);
-            margin-left:4px;
+
+        .collapsed-label {
+            font-size: 12px;
+            color: var(--muted);
+            margin-left: 4px;
         }
-        details[open].collapsed-label{
-            display:none;
+
+        details[open].collapsed-label {
+            display: none;
         }
+
         body {
             margin: 0;
             background: var(--bg);
@@ -247,11 +254,13 @@
             color: var(--muted);
             font-size: 13px
         }
+
         .more {
             display: grid;
             gap: 10px;
             grid-template-columns: 150px 500px 150px 120px
         }
+
         .section-header {
             display: flex;
             align-items: center;
@@ -307,23 +316,27 @@
             }
         }
 
-		.stepper{
-			display:inline-flex;
-			align-items:center;
-			gap:4px;
-		}
-		.stepper .step-btn{
-			padding:4px 8px;
-			border-raius:6px;
-			border:1px solid var(--border);
-			background:#0f1620;
-			color:var(--text);
-			font-size:14px;
-		}
-		.stepper .step-input{
-			width:80px;
-			text-align:right;	
-		}
+        .stepper {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+            .stepper .step-btn {
+                padding: 4px 8px;
+                border-radius: 6px;
+                border: 1px solid var(--border);
+                background: #0f1620;
+                color: var(--text);
+                font-size: 14px;
+                height: 40px;
+                width: 40px;
+            }
+
+            .stepper .step-input {
+                width: 80px;
+                text-align: right;
+            }
         /* Tabellen im Druck ohne Linien */
         .print-table {
             width: 100%;
@@ -413,11 +426,11 @@
                     funkrufname: "Da-Schau 100",
                     editable: false,
                     vehicles: [
-                        { id: "ds-01", vehicle: "MTF", funkrufname: "Da-Schau 1/19-1", present: false, crew1: 0, crew2: 0, agt: 0 ,  maxcrew:9},
-                        { id: "ds-02", vehicle: "DLK 23/12", funkrufname: "Da-Schau 1/34-1", present: false, crew1: 0, crew2: 0, agt: 0 ,  maxcrew:3},
-                        { id: "ds-03", vehicle: "LF 8/6", funkrufname: "Da-Schau 1/44-1", present: false, crew1: 0, crew2: 0, agt: 0 ,  maxcrew:9},
-                        { id: "ds-04", vehicle: "LF 16/12", funkrufname: "Da-Schau 1/45-1", present: false, crew1: 0, crew2: 0, agt: 0 ,  maxcrew:9},
-                        { id: "ds-05", vehicle: "MZF 2", funkrufname: "Da-Schau 1/72-1", present: false, crew1: 0, crew2: 0, agt: 0  ,  maxcrew:3},
+                        { id: "ds-01", vehicle: "MTF", funkrufname: "Da-Schau 1/19-1", present: false, crew1: 0, crew2: 0, agt: 0, maxcrew: 9 },
+                        { id: "ds-02", vehicle: "DLK 23/12", funkrufname: "Da-Schau 1/34-1", present: false, crew1: 0, crew2: 0, agt: 0, maxcrew: 3 },
+                        { id: "ds-03", vehicle: "LF 8/6", funkrufname: "Da-Schau 1/44-1", present: false, crew1: 0, crew2: 0, agt: 0, maxcrew: 9 },
+                        { id: "ds-04", vehicle: "LF 16/12", funkrufname: "Da-Schau 1/45-1", present: false, crew1: 0, crew2: 0, agt: 0, maxcrew: 9 },
+                        { id: "ds-05", vehicle: "MZF 2", funkrufname: "Da-Schau 1/72-1", present: false, crew1: 0, crew2: 0, agt: 0, maxcrew: 3 },
 
                     ]
                 },
@@ -427,11 +440,11 @@
                     funkrufname: "Da-Schau 2",
                     editable: false,
                     vehicles: [
-                        { id: "ha-01", vehicle: "MTF", funkrufname: "Da-Schau 2/19-1", present: false, crew1: 0, crew2: 0, agt: 0 ,  maxcrew:9},
-                        { id: "ha-02", vehicle: "TSF-W", funkrufname: "Da-Schau 2/42-1", present: false, crew1: 0, crew2: 0, agt: 0 ,  maxcrew:6},
-                        { id: "ha-03", vehicle: "LF 16-TS", funkrufname: "Da-Schau 2/43-1", present: false, crew1: 0, crew2: 0, agt: 0 ,  maxcrew:9},
-                        { id: "ha-04", vehicle: "RW 1", funkrufname: "Da-Schau 2/51-1", present: false, crew1: 0, crew2: 0, agt: 0 ,  maxcrew:3},
-                        { id: "ha-05", vehicle: "SW 2000", funkrufname: "Da-Schau 2/68-1", present: false, crew1: 0, crew2: 0, agt: 0 ,  maxcrew:3},
+                        { id: "ha-01", vehicle: "MTF", funkrufname: "Da-Schau 2/19-1", present: false, crew1: 0, crew2: 0, agt: 0, maxcrew: 9 },
+                        { id: "ha-02", vehicle: "TSF-W", funkrufname: "Da-Schau 2/42-1", present: false, crew1: 0, crew2: 0, agt: 0, maxcrew: 6 },
+                        { id: "ha-03", vehicle: "LF 16-TS", funkrufname: "Da-Schau 2/43-1", present: false, crew1: 0, crew2: 0, agt: 0, maxcrew: 9 },
+                        { id: "ha-04", vehicle: "RW 1", funkrufname: "Da-Schau 2/51-1", present: false, crew1: 0, crew2: 0, agt: 0, maxcrew: 3 },
+                        { id: "ha-05", vehicle: "SW 2000", funkrufname: "Da-Schau 2/68-1", present: false, crew1: 0, crew2: 0, agt: 0, maxcrew: 3 },
 
                     ]
                 },
@@ -441,8 +454,8 @@
                     funkrufname: "Da-Schau 3",
                     editable: false,
                     vehicles: [
-                        { id: "r-01", vehicle: "ELW 1", funkrufname: "Da-Schau 3/11-1", present: false, crew1: 0, crew2: 0, agt: 0 ,  maxcrew:5},
-                        { id: "r-02", vehicle: "LF 16/12", funkrufname: "Da-Schau 3/45-1", present: false, crew1: 0, crew2: 0, agt: 0 ,  maxcrew:9},
+                        { id: "r-01", vehicle: "ELW 1", funkrufname: "Da-Schau 3/11-1", present: false, crew1: 0, crew2: 0, agt: 0, maxcrew: 5 },
+                        { id: "r-02", vehicle: "LF 16/12", funkrufname: "Da-Schau 3/45-1", present: false, crew1: 0, crew2: 0, agt: 0, maxcrew: 9 },
                     ]
                 },
                 {
@@ -451,9 +464,9 @@
                     funkrufname: "Da-Schau 4",
                     editable: false,
                     vehicles: [
-                        { id: "g-01", vehicle: "MTF", funkrufname: "Da-Schau 4/19-1", present: false, crew1: 0, crew2: 0, agt: 0 ,  maxcrew:9},
-                        { id: "g-02", vehicle: "TSF-W", funkrufname: "Da-Schau 4/42-1", present: false, crew1: 0, crew2: 0, agt: 0 ,  maxcrew:6},
-                        { id: "g-03", vehicle: "MZF-G", funkrufname: "Da-Schau 4/73-1", present: false, crew1: 0, crew2: 0, agt: 0 ,  maxcrew:6},
+                        { id: "g-01", vehicle: "MTF", funkrufname: "Da-Schau 4/19-1", present: false, crew1: 0, crew2: 0, agt: 0, maxcrew: 9 },
+                        { id: "g-02", vehicle: "TSF-W", funkrufname: "Da-Schau 4/42-1", present: false, crew1: 0, crew2: 0, agt: 0, maxcrew: 6 },
+                        { id: "g-03", vehicle: "MZF-G", funkrufname: "Da-Schau 4/73-1", present: false, crew1: 0, crew2: 0, agt: 0, maxcrew: 6 },
                     ]
                 },
                 {
@@ -462,9 +475,9 @@
                     funkrufname: "",
                     editable: true,
                     vehicles: [
-                        { id: "w-01", vehicle: "RTW", funkrufname: "", present: false, crew1: 0, crew2: 0, agt: 0 ,  maxcrew:9},
-                        { id: "w-02", vehicle: "NEF", funkrufname: "", present: false, crew1: 0, crew2: 0, agt: 0 ,  maxcrew:9},
-                        { id: "w-03", vehicle: "Polizei", funkrufname: "", present: false, crew1: 0, crew2: 0, agt: 0 ,  maxcrew:9},
+                        { id: "w-01", vehicle: "RTW", funkrufname: "", present: false, crew1: 0, crew2: 0, agt: 0, maxcrew: 9 },
+                        { id: "w-02", vehicle: "NEF", funkrufname: "", present: false, crew1: 0, crew2: 0, agt: 0, maxcrew: 9 },
+                        { id: "w-03", vehicle: "Polizei", funkrufname: "", present: false, crew1: 0, crew2: 0, agt: 0, maxcrew: 9 },
                     ]
                 }
             ],
@@ -545,7 +558,7 @@
                 const editable = !!group.editable;
                 //const summary = document.createElement("summary");
                 //summary.className = "group-header";
-                
+
                 //const h2 = document.createElement("h2");
                 //h2.textContent = group.name;
 
@@ -554,101 +567,101 @@
                 //actions.innerHTML = "";
                 //const actions2 = document.createElement("span");
                 //actions.className = "collapse
-                
+
                 //summary.appendChild(h2);
                 //summary.appendChild(actions);
                 //det.appendChild(summary);
                 det.innerHTML = `
-                <summary class="group-header">
+                    <summary class="group-header">
+                        <table>
+                          <thead>
+                              <tr>
+                                  <th style="width:200px"><h2>${escapeHTML(group.name)}</h2></th>
+                                  <th style="width:200px"><h2>${escapeHTML(group.funkrufname)}</h2></th>
+                                  <th style="width:70px"></th>
+                                  <th style="width:100px"></th>
+                                  <th style="width:20px"></th>
+                                  <th style="width:100px"></th>
+                                  <th style="width:100px"></th>
+                                </tr>
+                            </thead>
+                        </table>
+                        <!--<span class="group-header">
+                            <span class="collapsed-label">(anzeigen)</span>
+                        </span>-->
+                    </summary>
+
+                  <div style="overflow:auto; margin-top:6px">
                     <table>
                       <thead>
-                          <tr>
-                              <th style="width:200px"><h2>${escapeHTML(group.name)}</h2></th>
-                              <th style="width:200px"><h2>${escapeHTML(group.funkrufname)}</h2></th>
-                              <th style="width:70px"></th>
-                              <th style="width:100px"></th>
-                              <th style="width:20px"></th>
-                              <th style="width:100px"></th>
-                              <th style="width:100px"></th>
-                            </tr>
-                        </thead>
-                    </table>
-                    <!--<span class="group-header">
-                        <span class="collapsed-label">(anzeigen)</span>                        
-                    </span>-->
-                </summary>
-                
-              <div style="overflow:auto; margin-top:6px">
-                <table>
-                  <thead>
-                    <tr>
-                      <th style="width:200px">Fahrzeug</th>
-                      <th style="width:200px">Funkrufname</th>
-                      <th style="width:70px"></th>
-                      <th style="width:100px">Besatzung</th>
-                      <th style="width:20px"></th>
-                      <th style="width:100px"></th>
-                      <th style="width:100px">AGT</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    ${group.vehicles.map(v => `
-                      <tr data-vid="${v.id}">
-                        <td>
-                          ${editable
+                        <tr>
+                          <th style="width:200px">Fahrzeug</th>
+                          <th style="width:200px">Funkrufname</th>
+                          <th style="width:70px"></th>
+                          <th style="width:100px">Besatzung</th>
+                          <th style="width:20px"></th>
+                          <th style="width:100px"></th>
+                          <th style="width:100px">AGT</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        ${group.vehicles.map(v => `
+                          <tr data-vid="${v.id}">
+                            <td>
+                              ${editable
                         ? `<input type="text" value="${escapeHTML(v.vehicle || "")}" data-vehicle-field="vehicle" />`
                         : `${escapeHTML(v.vehicle || "")}`
                     }
-                        </td>
-                        <td>
-                          ${editable
+                            </td>
+                            <td>
+                              ${editable
                         ? `<input type="text" value="${escapeHTML(v.funkrufname || "")}" data-vehicle-field="funkrufname" />`
                         : `${escapeHTML(v.funkrufname || "")}`
                     }
-                        </td>
-                        <td style="text-align:center">
-                          <input type="checkbox" ${v.present ? "checked" : ""} data-vehicle-field="present" />
-                        </td>
-                        <td>
-							<div class="stepper">
-								<button type="button" class="step-btn" data-step="-1">-</button>
-								<input type="number" min="0" max="${Number(v.maxcrew || 0)}" step="1" value="${Number(v.crew1 || 0)}" data-vehicle-field="crew1" class="step-input"/>
-								<button type="button" class="step-btn" data-step="1">+</button>
-							</div>
-						</td>
-						
-                        <td style="text-align:center">/</td>
-                        <td>
-							<div class="stepper">
-								<button type="button" class="step-btn" data-step="-1">-</button>
-								<input type="number" min="0" max="${Number(v.maxcrew || 0)}" step="1" value="${Number(v.crew2 || 0)}" data-vehicle-field="crew2" class="step-input"/>
-								<button type="button" class="step-btn" data-step="1">+</button>
-							</div>
-						</td>
-                        <td>
-							<div class="stepper">
-								<button type="button" class="step-btn" data-step="-1">-</button>
-								<input type="number" min="0" max="${Number(v.maxcrew || 0)}" step="1" value="${Number(v.agt || 0)}" data-vehicle-field="agt" class="step-input"/>
-								<button type="button" class="step-btn" data-step="1">+</button>
-							</div>
-						</td>
-                      </tr>
-                    `).join("")}
-                  </tbody>
-                </table>
-              </div>
-              <div style="margin-top:8px; display:flex; justify-content:flex-start; gap:8px; flex-wrap:wrap">
-                ${editable
+                            </td>
+                            <td style="text-align:center">
+                              <input type="checkbox" ${v.present ? "checked" : ""} data-vehicle-field="present" />
+                            </td>
+                            <td>
+                                <div class="stepper">
+                                    <button type="button" class="step-btn" data-step="-1">-</button>
+                                    <input type="number" min="0" max="${Number(v.maxcrew || 0)}" step="1" value="${Number(v.crew1 || 0)}" data-vehicle-field="crew1" class="step-input"/>
+                                    <button type="button" class="step-btn" data-step="1">+</button>
+                                </div>
+                            </td>
+
+                            <td style="text-align:center">/</td>
+                            <td>
+                                <div class="stepper">
+                                    <button type="button" class="step-btn" data-step="-1">-</button>
+                                    <input type="number" min="0" max="${Number(v.maxcrew || 0)}" step="1" value="${Number(v.crew2 || 0)}" data-vehicle-field="crew2" class="step-input"/>
+                                    <button type="button" class="step-btn" data-step="1">+</button>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="stepper">
+                                    <button type="button" class="step-btn" data-step="-1">-</button>
+                                    <input type="number" min="0" max="${Number(v.maxcrew || 0)}" step="1" value="${Number(v.agt || 0)}" data-vehicle-field="agt" class="step-input"/>
+                                    <button type="button" class="step-btn" data-step="1">+</button>
+                                </div>
+                            </td>
+                          </tr>
+                        `).join("")}
+                      </tbody>
+                    </table>
+                  </div>
+                  <div style="margin-top:8px; display:flex; justify-content:flex-start; gap:8px; flex-wrap:wrap">
+                    ${editable
                         ? `<button class="btn" data-add-vehicle="${group.id}">Fahrzeug hinzufügen</button>`
                         : ``
                     }
-              </div>
-            `;
+                  </div>
+                `;
                 wrap.appendChild(det);
             });
         }
 
-        
+
         /* ===========================
          * Totals
          * =========================== */
@@ -733,91 +746,91 @@
             }
         });
 
-		document.addEventListener("click", e=>{
-			const btn = e.target.closest(".step-btn");
-			if (!btn) return;
-			const step = Number(btn.dataset.step || 1);
-			const wrapper = btn.closest(".stepper");
-			if (!wrapper) return;
-			const input = wrapper.querySelector(".step-input");
-			let val = input.value === "" ? 0 : Number(input.value);
-			if (Number.isNaN(val)) val = 0;
-			const tr = input.closest("tr[data-vid]");
-			const details = input.closest("[data-group-id]");
-			if (!tr || !details) return;
-			const gid = details.getAttribute("data-group-id");
-			const vid = tr.getAttribute("data-vid");
-			const group = state.groups.find(g => g.id === gid);
-			if (!group) return;
-			const veh = group.vehicles.find(v => v.id === vid);
-			if (!veh) return;
-			const field = input.getAttribute("data-vehicle-field");
-			const min = input.min !== "" ? Number(input.min) : -Infinity;
-			const max = input.max !== "" ? Number(input.max) : Infinity;
-			let crew = 0;
-			if (field === "crew1") {
-				crew = veh["crew2"];
-			}
-			if (field === "crew2") {
-				crew = veh["crew1"];
-			}
-			
-			
-			val = val + step;
-			if (val + crew < min) val = min;
-			if (val + crew > max) val = max - crew;
-			if (val < 0) val = 0;
-			input.value = val;
-			
-			
-			if (field === "crew1" || field === "crew2" || field === "agt") {
-				veh[field] = val;
-			}
-			
-			updateTotals();
-			saveState();
-				
-		});
+        document.addEventListener("click", e => {
+            const btn = e.target.closest(".step-btn");
+            if (!btn) return;
+            const step = Number(btn.dataset.step || 1);
+            const wrapper = btn.closest(".stepper");
+            if (!wrapper) return;
+            const input = wrapper.querySelector(".step-input");
+            let val = input.value === "" ? 0 : Number(input.value);
+            if (Number.isNaN(val)) val = 0;
+            const tr = input.closest("tr[data-vid]");
+            const details = input.closest("[data-group-id]");
+            if (!tr || !details) return;
+            const gid = details.getAttribute("data-group-id");
+            const vid = tr.getAttribute("data-vid");
+            const group = state.groups.find(g => g.id === gid);
+            if (!group) return;
+            const veh = group.vehicles.find(v => v.id === vid);
+            if (!veh) return;
+            const field = input.getAttribute("data-vehicle-field");
+            const min = input.min !== "" ? Number(input.min) : -Infinity;
+            const max = input.max !== "" ? Number(input.max) : Infinity;
+            let crew = 0;
+            if (field === "crew1") {
+                crew = veh["crew2"];
+            }
+            if (field === "crew2") {
+                crew = veh["crew1"];
+            }
+
+
+            val = val + step;
+            if (val + crew < min) val = min;
+            if (val + crew > max) val = max - crew;
+            if (val < 0) val = 0;
+            input.value = val;
+
+
+            if (field === "crew1" || field === "crew2" || field === "agt") {
+                veh[field] = val;
+            }
+
+            updateTotals();
+            saveState();
+
+        });
 
         document.addEventListener("input", handleFieldChange);
         document.addEventListener("change", handleFieldChange);
-		document.addEventListener("focusin", e =>  {
-			const input = e.target;
-			if (input.matches('input[type="number"]')) {
-				setTimeout(() => input.select(), 50);
-			}
-		});
+        document.addEventListener("focusin", e => {
+            const input = e.target;
+            if (input.matches('input[type="number"]')) {
+                setTimeout(() => input.select(), 50);
+            }
+        });
 
-		document.addEventListener("input", e=> {
-			const input = e.target;
-			if (!input.matches(".step-input")) return;
-			let val = input.value === "" ? 0 : Number(input.value);
-			if (Number.isNaN(val)) val = 0;
-			const tr = input.closest("tr[data-vid]");
-			const details = input.closest("[data-group-id]");
-			if (!tr || !details) return;
-			const gid = details.getAttribute("data-group-id");
-			const vid = tr.getAttribute("data-vid");
-			const group = state.groups.find(g => g.id === gid);
-			if (!group) return;
-			const veh = group.vehicles.find(v => v.id === vid);
-			if (!veh) return;
-			const field = input.getAttribute("data-vehicle-field");
-			const min = input.min !== "" ? Number(input.min) : -Infinity;
-			const max = input.max !== "" ? Number(input.max) : Infinity;
-			let crew = 0;
-			if (field === "crew1") {
-				crew = veh["crew2"];
-			}
-			if (field === "crew2") {
-				crew = veh["crew1"];
-			}
-			
-			if (val + crew < min) val = min;
-			if (val + crew > max) val = max - crew;
-			if (val < 0) val = 0;
-			input.value = val;
-		});
+        document.addEventListener("input", e => {
+            const input = e.target;
+            if (!input.matches(".step-input")) return;
+            let val = input.value === "" ? 0 : Number(input.value);
+            if (Number.isNaN(val)) val = 0;
+            const tr = input.closest("tr[data-vid]");
+            const details = input.closest("[data-group-id]");
+            if (!tr || !details) return;
+            const gid = details.getAttribute("data-group-id");
+            const vid = tr.getAttribute("data-vid");
+            const group = state.groups.find(g => g.id === gid);
+            if (!group) return;
+            const veh = group.vehicles.find(v => v.id === vid);
+            if (!veh) return;
+            const field = input.getAttribute("data-vehicle-field");
+            const min = input.min !== "" ? Number(input.min) : -Infinity;
+            const max = input.max !== "" ? Number(input.max) : Infinity;
+            let crew = 0;
+            if (field === "crew1") {
+                crew = veh["crew2"];
+            }
+            if (field === "crew2") {
+                crew = veh["crew1"];
+            }
+
+            if (val + crew < min) val = min;
+            if (val + crew > max) val = max - crew;
+            if (val < 0) val = 0;
+            input.value = val;
+        });
 
         /* Enter → nächstes Feld */
         document.addEventListener("keydown", (e) => {
@@ -882,7 +895,7 @@
          * =========================== */
         document.getElementById("btnPrint").addEventListener("click", () => {
             saveReportAsPdfVector();
-			//buildReport();
+            //buildReport();
             //window.print();
         });
         function formatDateDE(dateStr) {
@@ -903,37 +916,37 @@
             info.style.border = "1px solid #bbb";
             info.style.margin = "10px 0";
             info.innerHTML = `
-  <table class="print-table">
-    <tr><th style="width:120px">Alarmstichwort:</th><td>${escapeHTML(state.stichwort || "-")}</td></tr>
-    <tr><th>Einsatzdatum:</th><td>${escapeHTML(formatDateDE(state.einsatzDatum) || "-")}</td></tr>
-  </table>
+      <table class="print-table">
+        <tr><th style="width:120px">Alarmstichwort:</th><td>${escapeHTML(state.stichwort || "-")}</td></tr>
+        <tr><th>Einsatzdatum:</th><td>${escapeHTML(formatDateDE(state.einsatzDatum) || "-")}</td></tr>
+      </table>
 `;
             rc.appendChild(info);
 
-            
+
 
             // Gemeinsame Fahrzeugtabelle mit einer Kopfzeile
             let rowsHtml = "";
             state.groups.forEach(g => {
                 // Gruppen-Zeile
                 rowsHtml += `
-          <tr class="group-row">
-            <td>${escapeHTML(g.name)}</td>
-            <td>${escapeHTML(g.funkrufname)}</td>
-            <td colspan="3"></td>
-          </tr>
-        `;
+              <tr class="group-row">
+                <td>${escapeHTML(g.name)}</td>
+                <td>${escapeHTML(g.funkrufname)}</td>
+                <td colspan="3"></td>
+              </tr>
+            `;
                 // Fahrzeuge der Gruppe
                 g.vehicles.forEach(v => {
                     rowsHtml += `
-            <tr>
-              <td style="width:200px">${escapeHTML(v.vehicle || "")}</td>
-              <td style="width:200px" style="text-align:left">${escapeHTML(v.funkrufname || "")}</td>
-              <td style="width:50px" style="text-align:center">${v.present ? "✓" : ""}</td>
-              <td style="width:100px" style="text-align:right">${Number(v.crew1 || 0)} / ${Number(v.crew2 || 0)}</td>
-              <td style="width:50px" style="text-align:right">${Number(v.agt || 0)}</td>
-            </tr>
-          `;
+                <tr>
+                  <td style="width:200px">${escapeHTML(v.vehicle || "")}</td>
+                  <td style="width:200px" style="text-align:left">${escapeHTML(v.funkrufname || "")}</td>
+                  <td style="width:50px" style="text-align:center">${v.present ? "✓" : ""}</td>
+                  <td style="width:100px" style="text-align:right">${Number(v.crew1 || 0)} / ${Number(v.crew2 || 0)}</td>
+                  <td style="width:50px" style="text-align:right">${Number(v.agt || 0)}</td>
+                </tr>
+              `;
                 });
             });
 
@@ -944,21 +957,21 @@
             vehBox.style.border = "1px solid #bbb";
             vehBox.style.margin = "5px 0";
             vehBox.innerHTML = `
-        <table class="print-table">
-          <thead>
-            <tr>
-              <th style="width:200px">Fahrzeug</th>
-              <th style="width:200px" style="text-align:left">Funkrufname</th>
-              <th style="width:50px" style="text-align:center"></th>
-              <th style="width:100px" style="text-align:right">Besatzung</th>
-              <th style="width:50px" style="text-align:right">AGT</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${rowsHtml}
-          </tbody>
-        </table>
-      `;
+            <table class="print-table">
+              <thead>
+                <tr>
+                  <th style="width:200px">Fahrzeug</th>
+                  <th style="width:200px" style="text-align:left">Funkrufname</th>
+                  <th style="width:50px" style="text-align:center"></th>
+                  <th style="width:100px" style="text-align:right">Besatzung</th>
+                  <th style="width:50px" style="text-align:right">AGT</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${rowsHtml}
+              </tbody>
+            </table>
+          `;
             rc.appendChild(vehBox);
 
             // Gesamtsumme (unverändert, aber ohne Tabellenlinien)
@@ -970,153 +983,153 @@
             totals.style.border = "1px solid #bbb";
             totals.style.margin = "5px 0";
             totals.innerHTML = `
-        <h3 style="margin:0 0 6px 0">Gesamtsumme</h3>
-        <div>Fahrzeuge vor Ort: <strong>${t.vehiclesOnSite}</strong></div>
-        <div>Besatzung gesamt: <strong>${t.totalCrew}</strong></div>
-        <div>AGT gesamt: <strong>${t.totalAGT}</strong></div>
-      `;
+            <h3 style="margin:0 0 6px 0">Gesamtsumme</h3>
+            <div>Fahrzeuge vor Ort: <strong>${t.vehiclesOnSite}</strong></div>
+            <div>Besatzung gesamt: <strong>${t.totalCrew}</strong></div>
+            <div>AGT gesamt: <strong>${t.totalAGT}</strong></div>
+          `;
             rc.appendChild(totals);
         }
-		
-		function buildPdfFilename(){
-  const date = document.getElementById("einsatzdatum")?.value
-    ? document.getElementById("einsatzdatum").value.split("-").reverse().join(".")
-    : new Date().toLocaleDateString("de-DE");
 
-  const stichwort = document.getElementById("stichwort")?.value || "Einsatz";
+        function buildPdfFilename() {
+            const date = document.getElementById("einsatzdatum")?.value
+                ? document.getElementById("einsatzdatum").value.split("-").reverse().join(".")
+                : new Date().toLocaleDateString("de-DE");
 
-  return `${date}_${stichwort}.pdf`.replace(/\s+/g, "_");
-}
+            const stichwort = document.getElementById("stichwort")?.value || "Einsatz";
 
-function canSharePdf() {
-	return !!navigator.share && navigator.canShare &&
-	      	navigator.canShare({ files: [new File([], "x.pdf", { type: "application/pdf" })] });
-}
-		
-async function saveReportAsPdfVector() {
-  	if (!window.jspdf || !window.jspdf.jsPDF) {
-    	alert("jsPDF ist nicht geladen.");
-    	return;
-  	}
-  	if (!window.jspdf.jsPDF.API.autoTable) {
-    	alert("jsPDF autoTable ist nicht geladen.");
-    	return;
-  	}
-
-  	const { jsPDF } = window.jspdf;
-  	const doc = new jsPDF({ orientation: "p", unit: "mm", format: "a4" });
-
-  	const marginX = 10;
-  	let y = 12;
-
-  	// Kopf
-  	doc.setFont("helvetica", "bold");
-  	doc.setFontSize(14);
-  	doc.text("Kräfteübersicht", marginX, y);
-  	y += 8;
-
-  	doc.setFont("helvetica", "normal");
-  	doc.setFontSize(11);
-
-  	const stichwort = state.stichwort || "-";
-  	const datum = formatDateDE(state.einsatzDatum) || "-";
-
-  	doc.text(`Alarmstichwort: ${stichwort}`, marginX, y); y += 6;
-  	doc.text(`Einsatzdatum: ${datum}`, marginX, y); y += 6;
-
- 	y += 2;
-
-  	// Tabellen-Daten vorbereiten
-  	const head = [["Fahrzeug", "Funkrufname", " ", "Besatzung", "AGT"]];
-  	const body = [];
-
-  	state.groups.forEach(g => {
-    	// Gruppenzeile (fett)
-    	body.push([
-    	  	g.name || "",
-    	  	(g.funkrufname || ""), // falls nicht vorhanden, bleibt leer
-    	  	"",
-     	 	"",
-     	 	""
-    	]);
-
-   	 	g.vehicles.forEach(v => {
-    	  	body.push([
-        		v.vehicle || "",
-        		v.funkrufname || "",
-        		v.present ? "✓" : "",
-        		`${Number(v.crew1 || 0)} / ${Number(v.crew2 || 0)}`,
-        		String(Number(v.agt || 0))
-      		]);
-    	});
-  	});
-
-  // Tabelle (vektorbasiert, automatisch mehrseitig)
-  doc.autoTable({
-    head,
-    body,
-    startY: y,
-    margin: { left: marginX, right: marginX },
-    styles: {
-      font: "helvetica",
-      fontSize: 10,
-      cellPadding: 1.5,
-      overflow: "linebreak"
-    },
-    headStyles: {
-      fontStyle: "bold"
-    },
-    columnStyles: {
-      0: { cellWidth: 55 }, // Fahrzeug
-      1: { cellWidth: 55 }, // Funkrufname
-      2: { cellWidth: 8, halign: "center" }, // ✓
-      3: { cellWidth: 45, halign: "right" }, // Besatzung
-      4: { cellWidth: 17, halign: "right" }  // AGT
-    },
-    didParseCell: function (data) {
-      // Gruppenzeilen fett + leicht abgesetzt
-      if (data.section === "body") {
-        const row = data.row.raw;
-        const isGroupRow = row && row[2] === "" && row[3] === "" && row[4] === "" && row[0] && !row[0].includes("/") ;
-        // robustere Erkennung: Gruppenzeile hat nur Name, Rest leer
-        if (isGroupRow) {
-          data.cell.styles.fontStyle = "bold";
-          data.cell.styles.fillColor = [245, 245, 245];
+            return `${date}_${stichwort}.pdf`.replace(/\s+/g, "_");
         }
-      }
-    }
-  });
 
-  // Gesamtsumme unter der Tabelle (auf letzter Seite)
-  const t = computeTotals();
-  const afterY = doc.lastAutoTable.finalY + 8;
+        function canSharePdf() {
+            return !!navigator.share && navigator.canShare &&
+                navigator.canShare({ files: [new File([], "x.pdf", { type: "application/pdf" })] });
+        }
 
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(12);
-  doc.text("Gesamtsumme", marginX, afterY);
+        async function saveReportAsPdfVector() {
+            if (!window.jspdf || !window.jspdf.jsPDF) {
+                alert("jsPDF ist nicht geladen.");
+                return;
+            }
+            if (!window.jspdf.jsPDF.API.autoTable) {
+                alert("jsPDF autoTable ist nicht geladen.");
+                return;
+            }
 
-  doc.setFont("helvetica", "normal");
-  doc.setFontSize(11);
-  doc.text(`Fahrzeuge vor Ort: ${t.vehiclesOnSite}`, marginX, afterY + 6);
-  doc.text(`Besatzung gesamt: ${t.totalCrew}`, marginX, afterY + 12);
-  doc.text(`AGT gesamt: ${t.totalAGT}`, marginX, afterY + 18);
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF({ orientation: "p", unit: "mm", format: "a4" });
 
-  const blob = doc.output("blob");
-  const file = new File([blob], buildPdfFilename(), {
-    type: "application/pdf"
-  });
+            const marginX = 10;
+            let y = 12;
 
-  if (canSharePdf()) {
-    await navigator.share({
-      files: [file],
-      title: "Kräfteübersicht",
-      text: "PDF Kräfteübersicht"
-    });
-  } else {
-    // Fallback: normaler Download
-    doc.save(buildPdfFilename());
-  }
-}
+            // Kopf
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(14);
+            doc.text("Kräfteübersicht", marginX, y);
+            y += 8;
+
+            doc.setFont("helvetica", "normal");
+            doc.setFontSize(11);
+
+            const stichwort = state.stichwort || "-";
+            const datum = formatDateDE(state.einsatzDatum) || "-";
+
+            doc.text(`Alarmstichwort: ${stichwort}`, marginX, y); y += 6;
+            doc.text(`Einsatzdatum: ${datum}`, marginX, y); y += 6;
+
+            y += 2;
+
+            // Tabellen-Daten vorbereiten
+            const head = [["Fahrzeug", "Funkrufname", " ", "Besatzung", "AGT"]];
+            const body = [];
+
+            state.groups.forEach(g => {
+                // Gruppenzeile (fett)
+                body.push([
+                    g.name || "",
+                    (g.funkrufname || ""), // falls nicht vorhanden, bleibt leer
+                    "",
+                    "",
+                    ""
+                ]);
+
+                g.vehicles.forEach(v => {
+                    body.push([
+                        v.vehicle || "",
+                        v.funkrufname || "",
+                        v.present ? "X" : "",
+                        `${Number(v.crew1 || 0)} / ${Number(v.crew2 || 0)}`,
+                        String(Number(v.agt || 0))
+                    ]);
+                });
+            });
+
+            // Tabelle (vektorbasiert, automatisch mehrseitig)
+            doc.autoTable({
+                head,
+                body,
+                startY: y,
+                margin: { left: marginX, right: marginX },
+                styles: {
+                    font: "helvetica",
+                    fontSize: 10,
+                    cellPadding: 1.5,
+                    overflow: "linebreak"
+                },
+                headStyles: {
+                    fontStyle: "bold"
+                },
+                columnStyles: {
+                    0: { cellWidth: 55 }, // Fahrzeug
+                    1: { cellWidth: 55 }, // Funkrufname
+                    2: { cellWidth: 8, halign: "center" }, // ✓
+                    3: { cellWidth: 45, halign: "right" }, // Besatzung
+                    4: { cellWidth: 17, halign: "right" }  // AGT
+                },
+                didParseCell: function (data) {
+                    // Gruppenzeilen fett + leicht abgesetzt
+                    if (data.section === "body") {
+                        const row = data.row.raw;
+                        const isGroupRow = row && row[2] === "" && row[3] === "" && row[4] === "" && row[0] && !row[0].includes("/");
+                        // robustere Erkennung: Gruppenzeile hat nur Name, Rest leer
+                        if (isGroupRow) {
+                            data.cell.styles.fontStyle = "bold";
+                            data.cell.styles.fillColor = [245, 245, 245];
+                        }
+                    }
+                }
+            });
+
+            // Gesamtsumme unter der Tabelle (auf letzter Seite)
+            const t = computeTotals();
+            const afterY = doc.lastAutoTable.finalY + 8;
+
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(12);
+            doc.text("Gesamtsumme", marginX, afterY);
+
+            doc.setFont("helvetica", "normal");
+            doc.setFontSize(11);
+            doc.text(`Fahrzeuge vor Ort: ${t.vehiclesOnSite}`, marginX, afterY + 6);
+            doc.text(`Besatzung gesamt: ${t.totalCrew}`, marginX, afterY + 12);
+            doc.text(`AGT gesamt: ${t.totalAGT}`, marginX, afterY + 18);
+
+            const blob = doc.output("blob");
+            const file = new File([blob], buildPdfFilename(), {
+                type: "application/pdf"
+            });
+
+            if (canSharePdf()) {
+                await navigator.share({
+                    files: [file],
+                    title: "Kräfteübersicht",
+                    text: "PDF Kräfteübersicht"
+                });
+            } else {
+                // Fallback: normaler Download
+                doc.save(buildPdfFilename());
+            }
+        }
 
 
         /* ===========================
@@ -1127,7 +1140,7 @@ async function saveReportAsPdfVector() {
                 { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }[c]
             ));
         }
-		
+
 
 
         /* Initiales Rendern */
